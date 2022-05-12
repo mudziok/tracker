@@ -1,20 +1,19 @@
 import { FC, useContext } from "react";
-import { TaskPreviewProps } from "../Task/TaskPreview";
 import { DragGroupContext } from "./DragGroup";
 
 interface DropZoneProps {
-    children: React.ReactNode,
-    onDroppedInZone: (props: TaskPreviewProps) => void,
+  children: React.ReactNode,
+  onDroppedInZone: (props: JSX.Element) => void,
 };
 
 const DropZone:FC<DropZoneProps> = ({children, onDroppedInZone}) => {
-    const {draggedProps} = useContext(DragGroupContext);
+  const {dragged} = useContext(DragGroupContext);
 
-    return (
-        <div onMouseUp={() => onDroppedInZone(draggedProps!)}>
-            {children}
-        </div>
-    );
+  return (
+    <div onMouseUp={() => onDroppedInZone(dragged!)}>
+      {children}
+    </div>
+  );
 };
 
 export default DropZone;

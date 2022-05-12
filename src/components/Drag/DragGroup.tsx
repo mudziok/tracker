@@ -1,35 +1,36 @@
-import React, { useState } from "react";
-import { FC } from "react";
-import TaskPreview, { TaskPreviewProps } from "../Task/TaskPreview";
+import React, { FC, useState } from "react";
 
 interface DragGroupProps {
-    children?: React.ReactNode
+  children?: React.ReactNode,
 }
 
-export const DragGroupContext = React.createContext({
-    draggedProps: null as TaskPreviewProps | null,
-    onPicked: (props: TaskPreviewProps) => {}
+interface DragGroupContextProps {
+  dragged: JSX.Element | null,
+  onPicked: (componentInfo: JSX.Element) => void,
+}
+
+export const DragGroupContext = React.createContext<DragGroupContextProps>({
+  dragged: null,
+  onPicked: () => {},
 });
 
 const DragGroup:FC<DragGroupProps> = ({children}) => {
-    const [draggedProps, setDraggedProps] = useState<TaskPreviewProps | null>(null);
+  const [dragged, setDragged] = useState<JSX.Element | null>(null);
 
-    const onPicked = (props: TaskPreviewProps) => setDraggedProps(props);
-    const onReleased = () => {
-        setDraggedProps(null); 
-    };
+  const onPicked = (componentInfo: JSX.Element) => setDragged(componentInfo);
+  const onReleased = () => {
+    setDragged(null); 
+  };
 
-    return (
-        <DragGroupContext.Provider value={{draggedProps, onPicked}}>
-            <div onMouseUp={onReleased}>
-                {children}
-                Dragged:
-                { draggedProps &&
-                    <TaskPreview {...draggedProps}/>
-                }
-            </div>
-        </DragGroupContext.Provider>
-    );
+  return (
+    <DragGroupContext.Provider value={{dragged: dragged, onPicked}}>
+      <div onMouseUp={onReleased}>
+        { children }
+        Dragged:
+        { dragged }
+      </div>
+    </DragGroupContext.Provider>
+  );
 };
 
 export default DragGroup;

@@ -1,21 +1,20 @@
 import { FC, useContext } from "react";
-import TaskPreview, { TaskPreviewProps } from "../Task/TaskPreview";
 import { DragGroupContext } from "./DragGroup";
 
 interface DraggableProps {
-    childrenProps: TaskPreviewProps
+  children: JSX.Element
 }
 
-const Draggable:FC<DraggableProps> = ({childrenProps}) => {
-    const { draggedProps, onPicked} = useContext(DragGroupContext);
+const Draggable:FC<DraggableProps> = ({children}) => {
+  const { dragged, onPicked } = useContext(DragGroupContext);
 
-    if (draggedProps == childrenProps) return null;
+  if (dragged === children) return null;
 
-    return (
-        <div onMouseDown={() => onPicked(childrenProps)}>
-            <TaskPreview task={childrenProps.task}/>
-        </div>
-    );
+  return (
+    <div onMouseDown={() => onPicked(children)}>
+      {children}
+    </div>
+  );
 };
 
 export default Draggable;
