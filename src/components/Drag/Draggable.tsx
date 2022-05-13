@@ -1,4 +1,4 @@
-import { FC, useContext, useRef } from "react";
+import { FC, useCallback, useContext, useRef } from "react";
 import { DragGroupContext } from "./DragGroup";
 
 interface DraggableProps {
@@ -9,12 +9,12 @@ const Draggable:FC<DraggableProps> = ({children}) => {
   const elementRef = useRef<HTMLDivElement>(null)
   const { dragged, onPicked } = useContext(DragGroupContext);
 
-  if (dragged === children) return null;
-
-  const handleOnMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleOnMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const rect = elementRef.current?.getBoundingClientRect()!;
     onPicked(children, rect);
-  }
+  }, [children, onPicked])
+  
+  if (dragged === children) return null;
 
   return (
     <div onMouseDown={handleOnMouseDown} ref={elementRef}>

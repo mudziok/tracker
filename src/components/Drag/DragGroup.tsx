@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useCallback, useState } from "react";
 import MouseFollow from "./MouseFollow";
 
 interface DragGroupProps {
@@ -19,14 +19,15 @@ const DragGroup:FC<DragGroupProps> = ({children}) => {
   const [dragged, setDragged] = useState<JSX.Element | null>(null);
   const [initialRect, setInitialRect] = useState<DOMRect | null>(null);
 
-  const onPicked = (componentInfo: JSX.Element, initialRect: DOMRect) => {
+  const onPicked = useCallback((componentInfo: JSX.Element, initialRect: DOMRect) => {
     setDragged(componentInfo);
     setInitialRect(initialRect);
-  };
-  
-  const onReleased = () => {
-    setDragged(null); 
-  };
+  }, []);
+
+  const onReleased = useCallback(() => {
+    setDragged(null);
+    setInitialRect(null);
+  }, []);
 
   return (
     <DragGroupContext.Provider value={{dragged: dragged, onPicked}}>

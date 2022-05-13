@@ -1,4 +1,4 @@
-import { FC, useContext } from "react";
+import { FC, useCallback, useContext } from "react";
 import { DragGroupContext } from "./DragGroup";
 
 interface DropZoneProps {
@@ -9,8 +9,12 @@ interface DropZoneProps {
 const DropZone:FC<DropZoneProps> = ({children, onDroppedInZone}) => {
   const {dragged} = useContext(DragGroupContext);
 
+  const onMouseUp = useCallback(() => {
+    if (dragged) onDroppedInZone(dragged);
+  }, [dragged, onDroppedInZone]);
+
   return (
-    <div onMouseUp={() => onDroppedInZone(dragged!)}>
+    <div onMouseUp={onMouseUp}>
       {children}
     </div>
   );
