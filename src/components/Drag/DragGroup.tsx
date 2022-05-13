@@ -1,4 +1,5 @@
 import React, { FC, useState } from "react";
+import MouseFollow from "./MouseFollow";
 
 interface DragGroupProps {
   children?: React.ReactNode,
@@ -6,7 +7,7 @@ interface DragGroupProps {
 
 interface DragGroupContextProps {
   dragged: JSX.Element | null,
-  onPicked: (componentInfo: JSX.Element) => void,
+  onPicked: (componentInfo: JSX.Element, rect: DOMRect) => void,
 }
 
 export const DragGroupContext = React.createContext<DragGroupContextProps>({
@@ -16,8 +17,13 @@ export const DragGroupContext = React.createContext<DragGroupContextProps>({
 
 const DragGroup:FC<DragGroupProps> = ({children}) => {
   const [dragged, setDragged] = useState<JSX.Element | null>(null);
+  const [initialRect, setInitialRect] = useState<DOMRect | null>(null);
 
-  const onPicked = (componentInfo: JSX.Element) => setDragged(componentInfo);
+  const onPicked = (componentInfo: JSX.Element, initialRect: DOMRect) => {
+    setDragged(componentInfo);
+    setInitialRect(initialRect);
+  };
+  
   const onReleased = () => {
     setDragged(null); 
   };
@@ -26,8 +32,9 @@ const DragGroup:FC<DragGroupProps> = ({children}) => {
     <DragGroupContext.Provider value={{dragged: dragged, onPicked}}>
       <div onMouseUp={onReleased}>
         { children }
-        Dragged:
-        { dragged }
+        { (dragged && initialRect) &&
+          <MouseFollow initialRect={initialRect}>{ dragged }</MouseFollow>
+        }
       </div>
     </DragGroupContext.Provider>
   );
