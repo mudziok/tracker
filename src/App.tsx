@@ -1,6 +1,8 @@
 import styled, { ThemeProvider } from 'styled-components'
 import DragGroup from './contexts/Drag/DragGroup';
-import List from './components/List/List';
+import ListDisplay from './components/List/ListDisplay';
+import { useSelector } from 'react-redux';
+import { RootState } from './store';
 
 const StyledApp = styled.div`
   position: fixed;
@@ -21,17 +23,16 @@ const theme = {
 } as const;
 
 const App = () => {
-  const mockTask = {id: 1, name: "Mock name", description: "Mock description"};
-  const mockTask2 = {id: 2, name: "Mock name 2", description: "Mock description 2"};
-  const mockTasks = [mockTask, mockTask2];
+  const lists = useSelector((state: RootState) => state.tracker.lists);
+
+  const listDisplays = lists.map(list => <ListDisplay key={list.id} {...list} />);
 
   return (
     <ThemeProvider theme={theme}>
       <StyledApp>
         <DragGroup>
           <ListsContainer>
-            <List name={"For today"} tasks={mockTasks}/>
-            <List name={"For tomorrow"} tasks={mockTasks}/>
+            {listDisplays}
           </ListsContainer>
         </DragGroup>
       </StyledApp>
