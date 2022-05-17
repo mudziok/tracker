@@ -4,15 +4,11 @@ import Card from "../Card/Card";
 import Header from "../Header/Header";
 import Task from "./Task";
 
-export interface TaskPreviewProps {
-  task: Task,
-}
-
 const FixedWidthCard = styled(Card)`
   width: 250px;
 `;
 
-const TaskPreview:FC<TaskPreviewProps> = ({task}) => {
+const TaskPreview:FC<Task> = (task) => {
   const {name, description} = task;
   
   return (
