@@ -8,15 +8,17 @@ const StyledApp = styled.div`
   position: fixed;
   inset: 0;
   background-color: ${props => props.theme.background};
+  color: ${props => props.theme.primary};
   padding: 0.5em;
 `;
 
 const ListsContainer = styled.div`
   display: flex;
+  align-items: flex-start;
 `;
 
 const theme = {
-  primary: "#2c2b30",
+  primary: "#1e1e1e",
   accent: "#7c7ef5",
   background: "#feffff",
   roundness: "0.25rem",
