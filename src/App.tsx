@@ -3,6 +3,7 @@ import DragGroup from './contexts/Drag/DragGroup';
 import ListDisplay from './components/List/ListDisplay';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
+import ListAdd from './components/List/ListAdd';
 
 const StyledApp = styled.div`
   position: fixed;
@@ -10,6 +11,7 @@ const StyledApp = styled.div`
   background-color: ${props => props.theme.background};
   color: ${props => props.theme.primary};
   padding: 0.5em;
+  overflow: auto;
 `;
 
 const ListsContainer = styled.div`
@@ -35,6 +37,7 @@ const App = () => {
         <DragGroup>
           <ListsContainer>
             {listDisplays}
+            <ListAdd />
           </ListsContainer>
         </DragGroup>
       </StyledApp>
