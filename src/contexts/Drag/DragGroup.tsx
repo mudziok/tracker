@@ -1,4 +1,5 @@
 import React, { FC, useCallback, useState } from "react";
+import styled from "styled-components";
 import MouseFollow from "./MouseFollow";
 
 interface DragGroupProps {
@@ -21,6 +22,11 @@ export const DragGroupContext = React.createContext<DragGroupContextProps>({
   onPicked: () => {},
 });
 
+const DragGroupDiv = styled.div`
+  width: 100%;
+  height: 100%;
+`
+
 const DragGroup:FC<DragGroupProps> = ({children}) => {
   const [dragged, setDragged] = useState<JSX.Element | null>(null);
   const [draggedInfo, setDraggedInfo] = useState<ComponentInfo | null>(null);
@@ -37,12 +43,12 @@ const DragGroup:FC<DragGroupProps> = ({children}) => {
 
   return (
     <DragGroupContext.Provider value={{dragged, onPicked}}>
-      <div onMouseUp={onReleased}>
+      <DragGroupDiv onMouseUp={onReleased}>
         { children }
         { (dragged && draggedInfo) &&
           <MouseFollow initialInfo={draggedInfo}>{ dragged }</MouseFollow>
         }
-      </div>
+      </DragGroupDiv>
     </DragGroupContext.Provider>
   );
 };

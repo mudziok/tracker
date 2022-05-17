@@ -8,6 +8,7 @@ const Card = styled("div")`
   width: auto;
 
   padding: 0.5rem;
+  margin: 0.5rem;
 `
 
 export default Card;

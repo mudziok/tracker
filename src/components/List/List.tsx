@@ -1,41 +1,35 @@
 import { FC } from "react";
-import styled from "styled-components";
 import Draggable from "../../contexts/Drag/Draggable";
 import DropZone from "../../contexts/Drag/DropZone";
 import Card from "../Card/Card";
 import Header from "../Header/Header";
+import Task from "../Task/Task";
 import TaskPreview from "../Task/TaskPreview";
 
 interface ListProps {
-  name: string
+  name: string,
+  tasks: Task[],
 }
 
-const NarrowCard = styled(Card)`
-  width: 300px;
-`;
-
-const List:FC<ListProps> = ({name}) => {
-  const mockTask = {name: "Mock name", description: "Mock description"};
-  const mockTask2 = {name: "Mock name 2", description: "Mock description"};
-
+const List:FC<ListProps> = ({name, tasks}) => {
+  
   const onDroppedInsideList = (dropped: JSX.Element) => {
     if (dropped.type === TaskPreview) {
       console.log(name, dropped);
     }
   }
 
+  const draggableTasks = tasks.map(task => 
+    <Draggable key={task.id}><TaskPreview task={task}/></Draggable>
+  );
+
   return (
-    <NarrowCard>
+    <Card>
       <DropZone onDroppedInZone={onDroppedInsideList}>
         <Header size="lg">{name}</Header>
-        <Draggable>
-          <TaskPreview task={mockTask}/>
-        </Draggable>
-        <Draggable>
-          <TaskPreview task={mockTask2}/>
-        </Draggable>
+        { draggableTasks }
       </DropZone>
-    </NarrowCard>
+    </Card>
   )
 }
 

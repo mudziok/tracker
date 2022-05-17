@@ -7,7 +7,11 @@ const StyledApp = styled.div`
   inset: 0;
   background-color: ${props => props.theme.background};
   padding: 0.5em;
-`
+`;
+
+const ListsContainer = styled.div`
+  display: flex;
+`;
 
 const theme = {
   primary: "#2c2b30",
@@ -17,12 +21,18 @@ const theme = {
 } as const;
 
 const App = () => {
+  const mockTask = {id: 1, name: "Mock name", description: "Mock description"};
+  const mockTask2 = {id: 2, name: "Mock name 2", description: "Mock description 2"};
+  const mockTasks = [mockTask, mockTask2];
+
   return (
     <ThemeProvider theme={theme}>
       <StyledApp>
         <DragGroup>
-          <List name={"For today"}/>
-          <List name={"For tomorrow"}/>
+          <ListsContainer>
+            <List name={"For today"} tasks={mockTasks}/>
+            <List name={"For tomorrow"} tasks={mockTasks}/>
+          </ListsContainer>
         </DragGroup>
       </StyledApp>
     </ThemeProvider>
