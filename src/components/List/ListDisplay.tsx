@@ -25,12 +25,12 @@ const ListDisplay:FC<List> = (list) => {
   );
 
   return (
-    <Card>
-      <DropZone onDroppedInZone={onDroppedInsideList}>
-        <Header size="lg">{name}</Header>
-        { draggableTasks }
-      </DropZone>
-    </Card>
+    <DropZone onDroppedInZone={onDroppedInsideList}>
+      <Card>
+          <Header size="lg">{name}</Header>
+          { draggableTasks }
+      </Card>
+    </DropZone>
   )
 }
 
