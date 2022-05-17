@@ -8,6 +8,19 @@ import Header from "../Header/Header";
 import Task from "../Task/Task";
 import TaskPreview from "../Task/TaskPreview";
 import List from "./List";
+import Button from "../Button/Button";
+import styled from "styled-components";
+
+const HeaderRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+
+export const ListCard = styled(Card)`
+  box-sizing: border-box;
+  width: calc(250px + 4rem);
+`;
 
 const ListDisplay:FC<List> = (list) => {
   const {name, tasks} = list;
@@ -26,10 +39,14 @@ const ListDisplay:FC<List> = (list) => {
 
   return (
     <DropZone onDroppedInZone={onDroppedInsideList}>
-      <Card>
+      <ListCard>
+        <HeaderRow>
           <Header size="lg">{name}</Header>
-          { draggableTasks }
-      </Card>
+          <Button fontSize="sm">Edit List</Button>
+        </HeaderRow>
+        { draggableTasks }
+        <Button fontSize="lg" buttonSize="full">New Task +</Button>
+      </ListCard>
     </DropZone>
   )
 }

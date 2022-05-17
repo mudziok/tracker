@@ -6,6 +6,7 @@ import Task from "./Task";
 
 const FixedWidthCard = styled(Card)`
   width: 250px;
+  cursor: grab;
 `;
 
 const TaskPreview:FC<Task> = (task) => {
