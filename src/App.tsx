@@ -1,5 +1,5 @@
 import styled, { ThemeProvider } from 'styled-components'
-import DragGroup from './components/Drag/DragGroup';
+import DragGroup from './contexts/Drag/DragGroup';
 import List from './components/List/List';
 
 const StyledApp = styled.div`

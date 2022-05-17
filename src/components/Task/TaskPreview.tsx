@@ -1,7 +1,7 @@
 import { FC } from "react";
-import Card from "../shared/Card";
-import Header from "../shared/Header";
-import { Task } from "./Task";
+import Card from "../Card/Card";
+import Header from "../Header/Header";
+import Task from "./Task";
 
 export interface TaskPreviewProps {
   task: Task,

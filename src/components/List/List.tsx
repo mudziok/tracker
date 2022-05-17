@@ -1,9 +1,9 @@
 import { FC } from "react";
 import styled from "styled-components";
-import Draggable from "../Drag/Draggable";
-import DropZone from "../Drag/DropZone";
-import Card from "../shared/Card";
-import Header from "../shared/Header";
+import Draggable from "../../contexts/Drag/Draggable";
+import DropZone from "../../contexts/Drag/DropZone";
+import Card from "../Card/Card";
+import Header from "../Header/Header";
 import TaskPreview from "../Task/TaskPreview";
 
 interface ListProps {
