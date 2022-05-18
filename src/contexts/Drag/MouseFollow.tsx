@@ -16,6 +16,11 @@ const Positioner = styled("div").attrs<{offset: Offset}>(props => ({
   width: 200px;
   position: fixed;
   pointer-events: none;
+
+  & > * {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 `
 
 const MouseFollow:FC<MouseFollowProps> = ({children, initialInfo}) => {
