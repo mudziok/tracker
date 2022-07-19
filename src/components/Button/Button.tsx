@@ -27,10 +27,11 @@ const Button = styled("button")<{fontSize?: FontSize, buttonSize?: ButtonSize}>`
   cursor: pointer;
   margin: 0.5rem;
   white-space: nowrap;
+  opacity: 1.0;
 
-  transition: background-color 0.05s ease-out;
+  transition: opacity 0.05s ease-out;
   &:hover {
-    background-color: ${props => props.theme.primary};
+    opacity: 0.6;
   }
 `;
 

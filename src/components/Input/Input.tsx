@@ -9,8 +9,8 @@ const Input = styled(Header).attrs<{value: string}>(props => ({
 }))<{value: string}>`
   outline: none;
   width: 100%;
-  background: ${props => props.theme.background};
-  padding: 0.25rem;
+  padding: 0;
+  background: transparent;
 
   border: 0;
   border-bottom: transparent 0.25rem solid;

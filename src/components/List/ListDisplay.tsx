@@ -12,9 +12,7 @@ import styled from "styled-components";
 import Input from "../Input/Input";
 
 const HeaderRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  margin: 0.5em;
 `;
 
 export const ListCard = styled(Card)`
@@ -51,7 +49,7 @@ const ListDisplay:FC<List> = (list) => {
     <DropZone onDroppedInZone={onDroppedInsideList}>
       <ListCard>
         <HeaderRow>
-          <Input size="md" placeholder="List name" value={name} onChange={onNameChange}/>
+          <Input size="lg" placeholder="List name" value={name} onChange={onNameChange}/>
         </HeaderRow>
         { draggableTasks }
         { tasks.length === 0 &&
