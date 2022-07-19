@@ -25,6 +25,10 @@ export const trackerSlice = createSlice({
       const destinationList = state.lists.find(list => list.id === targetList.id);
       if (destinationList) { destinationList.tasks.push(movedTask); };
     },
+    editTask: (state, action: PayloadAction<{id: string, task: Task}>) => {
+      const {id, task: editedTask} = {...action.payload};
+      state.lists = state.lists.map(list => ({...list, tasks: list.tasks.map(task => (task.id === id) ? editedTask : task)}));
+    },
     deleteTask: (state, action: PayloadAction<{task: Task}>) => {
       const {task: deletedTask} = {...action.payload};
 
@@ -43,6 +47,6 @@ export const trackerSlice = createSlice({
   },
 })
 
-export const { addTask, moveTask, deleteTask, addList, editList, deleteList } = trackerSlice.actions
+export const { addTask, moveTask, editTask, deleteTask, addList, editList, deleteList } = trackerSlice.actions
 
 export default trackerSlice.reducer

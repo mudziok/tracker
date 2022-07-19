@@ -1,8 +1,10 @@
-import { FC, MouseEvent } from "react";
+import { FC, MouseEvent, ChangeEvent } from "react";
 import styled from "styled-components";
 import Card from "../Card/Card";
 import Task from "./Task";
 import Input from "../Input/Input";
+import { useDispatch } from "react-redux";
+import { editTask } from "../../features/tracker/trackerSlice";
 
 const FixedWidthCard = styled(Card)`
   width: 250px;
@@ -14,13 +16,18 @@ const FixedWidthCard = styled(Card)`
 `;
 
 const TaskPreview:FC<Task> = (task) => {
-  const {name, description} = task;
+  const {id, name, description} = task;
+  const dispatch = useDispatch();
   
   const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => e.stopPropagation();
+  
+  const onNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(editTask({id: id, task: {...task, name: e.target.value}}));
+  };
 
   return (
     <FixedWidthCard>
-      <Input size="md" value={name} onChange={()=>{}} onMouseDown={handleMouseDown}/>
+      <Input size="md" value={name} onChange={onNameChange} onMouseDown={handleMouseDown} />
       <p>{description}</p>
     </FixedWidthCard>
   );
