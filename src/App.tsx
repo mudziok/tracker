@@ -26,6 +26,12 @@ const theme = {
   roundness: "0.25rem",
 } as const;
 
+const darkTheme = {
+  ...theme,
+  primary: theme.background,
+  background: theme.primary,
+} as const;
+
 const App = () => {
   const lists = useSelector((state: RootState) => state.tracker.lists);
 

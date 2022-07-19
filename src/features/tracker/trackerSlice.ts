@@ -30,9 +30,19 @@ export const trackerSlice = createSlice({
 
       state.lists = state.lists.map(list => ({...list, tasks: list.tasks.filter(task => task.id !== deletedTask.id)}));
     },
+    addList(state, action: PayloadAction<{list: List}>) {
+      state.lists.push(action.payload.list);
+    },
+    editList(state, action: PayloadAction<{id: string, list: List}>) {
+      const {id, list: editedList} = {...action.payload};
+      state.lists = state.lists.map(list => (list.id === id) ? editedList : list);
+    },
+    deleteList(state, action: PayloadAction<{id: string}>) {
+      state.lists = state.lists.filter(list => list.id !== action.payload.id);
+    }
   },
 })
 
-export const { addTask, moveTask, deleteTask } = trackerSlice.actions
+export const { addTask, moveTask, deleteTask, addList, editList, deleteList } = trackerSlice.actions
 
 export default trackerSlice.reducer
