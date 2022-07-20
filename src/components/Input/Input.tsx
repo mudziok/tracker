@@ -1,7 +1,8 @@
+import TextareaAutosize from 'react-textarea-autosize';
 import styled from "styled-components";
 import Header from "../Header/Header";
 
-const Input = styled(Header).attrs<{value: string}>(props => ({
+export const Input = styled(Header).attrs<{value: string}>(props => ({
   as: "input",
   type: "text",
   value: props.value,
@@ -23,4 +24,26 @@ const Input = styled(Header).attrs<{value: string}>(props => ({
   }
 `
 
-export default Input;
+
+// https://codesandbox.io/s/l7y53n0k0z
+export const TextArea = styled(TextareaAutosize).attrs(props => ({
+  spellcheck: "false",
+}))`
+  outline: none;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+
+  border: 0;
+  border-bottom: transparent 0.125rem solid;
+  transition: border-bottom 0.05s ease-out;
+
+  color: ${props => props.theme.primary};
+  font-weight: 600;
+  resize: none;
+
+  caret-color: ${props => props.theme.primary};
+  &:focus {
+    border-bottom: ${props => props.theme.primary} 0.125rem solid;
+  }
+`;

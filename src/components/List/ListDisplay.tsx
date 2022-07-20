@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC } from "react";
 import { useDispatch } from "react-redux";
 import { addTask, deleteList, deleteTask, editList } from "../../features/tracker/trackerSlice";
 import Draggable from "../../contexts/Drag/Draggable";
@@ -9,7 +9,7 @@ import TaskPreview from "../Task/TaskPreview";
 import List from "./List";
 import Button from "../Button/Button";
 import styled from "styled-components";
-import Input from "../Input/Input";
+import { Input } from "../Input/Input";
 
 const HeaderRow = styled.div`
   margin: 0.5em;
