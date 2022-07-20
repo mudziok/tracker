@@ -10,6 +10,7 @@ import List from "./List";
 import Button from "../Button/Button";
 import styled from "styled-components";
 import { Input } from "../Input/Input";
+import { nanoid } from "nanoid";
 
 const HeaderRow = styled.div`
   margin: 0.5em;
@@ -24,7 +25,7 @@ const ListDisplay:FC<List> = (list) => {
   const {id, name, tasks} = list;
   const dispatch = useDispatch();
 
-  const onDroppedInsideList = (dropped: JSX.Element) => {
+  const droppedInsideHandled = (dropped: JSX.Element) => {
     if (dropped.type === TaskPreview) {
       const task = dropped.props as Task;
       dispatch(deleteTask({task: task}));
@@ -32,13 +33,20 @@ const ListDisplay:FC<List> = (list) => {
     }
   }
 
-  const onNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const changeName = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(editList({id: id, list: {...list, name: e.target.value}}));
   };
 
-  const onDeleteList = () => {
-    dispatch(deleteList({id: id}));
-  }
+  const trashList = () => dispatch(deleteList({id: id}));
+
+  const newTask = () => {
+    const emptyTask: Task = {
+      id: nanoid(), 
+      name: '', 
+      description: ''
+    };
+    dispatch(addTask({task: emptyTask, list: list}))
+  };
 
   const draggableTasks = tasks.map(task => 
     <Draggable key={task.id}><TaskPreview {...task}/></Draggable>
@@ -46,16 +54,16 @@ const ListDisplay:FC<List> = (list) => {
 
 
   return (
-    <DropZone onDroppedInZone={onDroppedInsideList}>
+    <DropZone onDroppedInZone={droppedInsideHandled}>
       <ListCard>
         <HeaderRow>
-          <Input size="lg" placeholder="List name" value={name} onChange={onNameChange}/>
+          <Input size="lg" placeholder="List name" value={name} onChange={changeName}/>
         </HeaderRow>
         { draggableTasks }
         { tasks.length === 0 &&
-          <Button fontSize="lg" buttonSize="full" onClick={onDeleteList}>Delete List</Button>
+          <Button fontSize="lg" buttonSize="full" onClick={trashList}>Delete List</Button>
         }
-        <Button fontSize="lg" buttonSize="full">New Task +</Button>
+        <Button fontSize="lg" buttonSize="full" onClick={newTask}>New Task +</Button>
       </ListCard>
     </DropZone>
   )

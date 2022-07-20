@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { FC, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import DropZone from "../../contexts/Drag/DropZone";
@@ -24,7 +25,7 @@ const ListAdd:FC = () => {
   const onCreateList = useCallback(() => {
     const newList: List = {
       name: "",
-      id: (+new Date()).toString(36).slice(-5),
+      id: nanoid(),
       tasks: [],
     };
     dispatch(addList({list: newList}));
