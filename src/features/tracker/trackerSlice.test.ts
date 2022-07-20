@@ -1,4 +1,6 @@
-import reducer, { addTask, deleteTask, moveTask } from './trackerSlice'
+import {trackerSlice, addTask, deleteTask, moveTask } from './trackerSlice'
+
+const reducer = trackerSlice.reducer;
 
 describe("Tracker Store", () => {
 

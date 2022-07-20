@@ -6,7 +6,7 @@ export const Input = styled(Header).attrs<{value: string}>(props => ({
   as: "input",
   type: "text",
   value: props.value,
-  spellcheck: "false",
+  spellCheck: "false",
 }))<{value: string}>`
   outline: none;
   width: 100%;
@@ -24,10 +24,8 @@ export const Input = styled(Header).attrs<{value: string}>(props => ({
   }
 `
 
-
-// https://codesandbox.io/s/l7y53n0k0z
 export const TextArea = styled(TextareaAutosize).attrs(props => ({
-  spellcheck: "false",
+  spellCheck: "false",
 }))`
   outline: none;
   width: 100%;

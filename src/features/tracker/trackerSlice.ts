@@ -1,15 +1,36 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import List from '../../components/List/List';
 import Task from '../../components/Task/Task';
-import { initialState } from './initialTrackerState';
+import { undoable } from '../undoable';
 
 export interface TrackerState {
   lists: List[],
 }
 
+export const initialTrackerState: TrackerState = {
+  lists: [
+    {
+      id: "1",
+      name: "Today",
+      tasks: [
+        {id: "1", name: "Mock name", description: "Mock description"},
+        {id: "2", name: "Mock name 2", description: "Mock description 2"},
+      ],
+    },
+    {
+      id: "2",
+      name: "Tomorrow",
+      tasks: [
+        {id: "3", name: "Mock name 3", description: "Mock description 3"},
+        {id: "4", name: "Mock name 4", description: "Mock description 4"},
+      ],
+    },
+  ],
+};
+
 export const trackerSlice = createSlice({
   name: 'tracker',
-  initialState: initialState,
+  initialState: initialTrackerState,
   reducers: {
     addTask: (state, action: PayloadAction<{task: Task, list: List}>) => {
       const {task: newTask, list: targetList} = {...action.payload};
@@ -47,6 +68,7 @@ export const trackerSlice = createSlice({
   },
 })
 
-export const { addTask, moveTask, editTask, deleteTask, addList, editList, deleteList } = trackerSlice.actions
+export const undoableTrackerSlice = undoable(trackerSlice);
 
-export default trackerSlice.reducer
+export const { addTask, moveTask, editTask, deleteTask, addList, editList, deleteList } = trackerSlice.actions
+export const { undo } = undoableTrackerSlice.actions;

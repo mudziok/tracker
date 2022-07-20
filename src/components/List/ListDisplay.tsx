@@ -1,6 +1,6 @@
 import { ChangeEvent, FC } from "react";
 import { useDispatch } from "react-redux";
-import { addTask, deleteList, deleteTask, editList } from "../../features/tracker/trackerSlice";
+import { addTask, deleteList, editList, moveTask } from "../../features/tracker/trackerSlice";
 import Draggable from "../../contexts/Drag/Draggable";
 import DropZone from "../../contexts/Drag/DropZone";
 import Card from "../Card/Card";
@@ -28,8 +28,7 @@ const ListDisplay:FC<List> = (list) => {
   const droppedInsideHandled = (dropped: JSX.Element) => {
     if (dropped.type === TaskPreview) {
       const task = dropped.props as Task;
-      dispatch(deleteTask({task: task}));
-      dispatch(addTask({task: task, list: list}));
+      dispatch(moveTask({task: task, list: list}));
     }
   }
 
