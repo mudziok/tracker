@@ -2,7 +2,8 @@ import { FC } from "react";
 import { useDispatch } from "react-redux";
 import { undo } from "../../features/tracker/trackerSlice";
 import Button from "../Button/Button";
-import { ListCard } from "./ListDisplay"
+import Card from "../Card/Card";
+import { FaUndo } from "react-icons/fa"
 
 const ListUndo:FC = () => {
   const dispatch = useDispatch();
@@ -10,9 +11,9 @@ const ListUndo:FC = () => {
   const undoLastAction = () => dispatch(undo());
 
   return (
-    <ListCard>
-      <Button fontSize="lg" buttonSize="full" onClick={undoLastAction}>Undo</Button>
-    </ListCard>
+    <Card>
+      <Button fontSize="lg" buttonSize="full" onClick={undoLastAction}><FaUndo /></Button>
+    </Card>
   );
 }
 

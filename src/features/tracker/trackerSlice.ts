@@ -11,7 +11,7 @@ export const initialTrackerState: TrackerState = {
   lists: [
     {
       id: "1",
-      name: "Today",
+      name: "Todo",
       tasks: [
         {id: "1", name: "Mock name", description: "Mock description"},
         {id: "2", name: "Mock name 2", description: "Mock description 2"},
@@ -19,10 +19,26 @@ export const initialTrackerState: TrackerState = {
     },
     {
       id: "2",
-      name: "Tomorrow",
+      name: "In Progress",
       tasks: [
         {id: "3", name: "Mock name 3", description: "Mock description 3"},
         {id: "4", name: "Mock name 4", description: "Mock description 4"},
+      ],
+    },
+    {
+      id: "3",
+      name: "In QA",
+      tasks: [
+        {id: "5", name: "Mock name 3", description: "Mock description 3"},
+        {id: "6", name: "Mock name 4", description: "Mock description 4"},
+      ],
+    },
+    {
+      id: "4",
+      name: "Done",
+      tasks: [
+        {id: "7", name: "Mock name 3", description: "Mock description 3"},
+        {id: "8", name: "Mock name 4", description: "Mock description 4"},
       ],
     },
   ],

@@ -4,9 +4,10 @@ import { useDispatch } from "react-redux";
 import DropZone from "../../contexts/Drag/DropZone";
 import { addList, deleteTask } from "../../features/tracker/trackerSlice";
 import Button from "../Button/Button";
+import Card from "../Card/Card";
 import Task from "../Task/Task";
 import List from "./List";
-import { ListCard } from "./ListDisplay"
+import { FaPlus } from "react-icons/fa";
 
 const ListAdd:FC = () => {
   const dispatch = useDispatch();
@@ -33,9 +34,9 @@ const ListAdd:FC = () => {
 
   return (
     <DropZone onDroppedInZone={onDroppedInside}>
-      <ListCard>
-        <Button fontSize="lg" buttonSize="full" onClick={onCreateList}>New List +</Button>
-      </ListCard>
+      <Card>
+        <Button fontSize="lg" buttonSize="full" onClick={onCreateList}><FaPlus/></Button>
+      </Card>
     </DropZone>
   );
 }

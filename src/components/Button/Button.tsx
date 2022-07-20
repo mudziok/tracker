@@ -4,6 +4,7 @@ const FontSizes = {
   "sm": "0.8rem",
   "md": "1.0rem",
   "lg": "1.5rem",
+  "xl": "2.5rem",
 } as const;
 
 const ButtonSizes = {
@@ -20,7 +21,8 @@ const Button = styled("button")<{fontSize?: FontSize, buttonSize?: ButtonSize}>`
   padding: ${props => FontSizes[props.fontSize || "md"]};
   font-weight: bold;
 
-  border: none;
+  border: 0;
+  box-shadow: none;
   border-radius: ${props => props.theme.roundness};
   background-color: ${props => props.theme.accent};
   color: ${props => props.theme.background};
@@ -30,6 +32,7 @@ const Button = styled("button")<{fontSize?: FontSize, buttonSize?: ButtonSize}>`
   opacity: 1.0;
 
   transition: opacity 0.05s ease-out;
+
   &:hover {
     opacity: 0.6;
   }
