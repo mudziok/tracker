@@ -6,10 +6,10 @@ import { addList, deleteTask } from "../../features/tracker/trackerSlice";
 import Button from "../Button/Button";
 import Card from "../Card/Card";
 import Task from "../Task/Task";
-import List from "./List";
+import List from "../List/List";
 import { FaPlus } from "react-icons/fa";
 
-const ListAdd:FC = () => {
+export const Add:FC = () => {
   const dispatch = useDispatch();
 
   const onDroppedInside = useCallback((dropped: JSX.Element) => {
@@ -40,5 +40,3 @@ const ListAdd:FC = () => {
     </DropZone>
   );
 }
-
-export default ListAdd;

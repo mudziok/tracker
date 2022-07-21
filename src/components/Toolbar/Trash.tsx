@@ -14,7 +14,7 @@ const CenteredCard = styled(Card)`
   align-items: center;
 `
 
-const ListTrash:FC = () => {
+export const Trash:FC = () => {
   const dispatch = useDispatch();
 
   const onDroppedInside = (dropped: JSX.Element) => {
@@ -30,5 +30,3 @@ const ListTrash:FC = () => {
     </DropZone>
   );
 }
-
-export default ListTrash;

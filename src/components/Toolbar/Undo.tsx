@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import Card from "../Card/Card";
 import { FaUndo } from "react-icons/fa"
 
-const ListUndo:FC = () => {
+export const Undo:FC = () => {
   const dispatch = useDispatch();
 
   const undoLastAction = () => dispatch(undo());
@@ -16,5 +16,3 @@ const ListUndo:FC = () => {
     </Card>
   );
 }
-
-export default ListUndo;
