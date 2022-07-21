@@ -3,7 +3,9 @@ import DragGroup from './contexts/Drag/DragGroup';
 import ListDisplay from './components/List/ListDisplay';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
-import { Add, DarkMode, Undo, Trash } from './components/Toolbar';
+import { Add, DarkMode, Undo, Trash, ChangeTheme } from './components/Toolbar';
+import { themes } from './features/theme/themes';
+import { selectTheme } from './features/theme/themeSlice';
 
 const StyledApp = styled.div`
   position: fixed;
@@ -14,10 +16,10 @@ const StyledApp = styled.div`
   overflow: auto;
   
   transition-duration: 0.1s;
-  transition-property: background-color, color;
+  transition-property: background-color, color, border-radius;
   * {
     transition-duration: 0.1s;
-    transition-property: background-color, color;
+    transition-property: background-color, color, border-radius;
   }
 
   * ::selection {
@@ -40,24 +42,18 @@ const ToolbarStack = styled.div`
   }
 `
 
-const theme = {
-  primary: "#1e1e1e",
-  accent: "#7c7ef5",
-  background: "#feffff",
-  roundness: "0.25rem",
-} as const;
-
-const darkTheme = {
-  ...theme,
-  primary: theme.background,
-  background: theme.primary,
-} as const;
-
 const App = () => {
-  const darkMode = useSelector<RootState>((state) => state.theme.darkMode);
   const lists = useSelector((state: RootState) => state.tracker.present.lists);
+  const darkMode = useSelector<RootState>((state) => state.theme.darkMode);
+  const theme = useSelector(selectTheme);
 
   const listDisplays = lists.map(list => <ListDisplay key={list.id} {...list} />);
+
+  const darkTheme = {
+    ...theme,
+    primary: theme.background,
+    background: theme.primary,
+  } as const;
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : theme}>
@@ -67,8 +63,9 @@ const App = () => {
             <ToolbarStack>
               <Add />
               <Undo />
-              <DarkMode />
               <Trash />
+              <DarkMode />
+              <ChangeTheme />
             </ToolbarStack>
             {listDisplays}
           </ListsContainer>

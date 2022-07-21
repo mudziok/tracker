@@ -41,12 +41,12 @@ export const TextArea = styled(TextareaAutosize).attrs(props => ({
   resize: none;
 
   caret-color: ${props => props.theme.primary};
-  
+
   &:focus {
     border-bottom: ${props => props.theme.primary} 0.125rem solid;
   }
 
-  ::selection {
+  ::selection ::selection {
     color: ${props => props.theme.background};
     background: ${props => props.theme.primary};
   }
