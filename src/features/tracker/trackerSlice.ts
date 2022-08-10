@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import List from "../../components/List/List";
 import Task from "../../components/Task/Task";
+import { RootState } from "../../store";
 import { undoable } from "../undoable";
 
 export interface TrackerState {
@@ -104,6 +105,8 @@ export const trackerSlice = createSlice({
 });
 
 export const undoableTrackerSlice = undoable(trackerSlice);
+
+export const selectLists = (state: RootState) => state.tracker.present.lists;
 
 export const {
   addTask,
