@@ -9,5 +9,12 @@ export const store = configureStore({
   },
 });
 
+store.subscribe(() => {
+  const slices = Object.entries(store.getState());
+  slices.forEach(([name, state]) => {
+    localStorage.setItem(name, JSON.stringify(state));
+  });
+});
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

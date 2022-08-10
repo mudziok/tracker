@@ -8,7 +8,7 @@ export interface TrackerState {
   lists: List[];
 }
 
-export const initialTrackerState: TrackerState = {
+export const defaultTrackerState: TrackerState = {
   lists: [
     {
       id: "1",
@@ -44,6 +44,10 @@ export const initialTrackerState: TrackerState = {
     },
   ],
 };
+
+const initialTrackerState: TrackerState = localStorage.getItem("tracker")
+  ? JSON.parse(localStorage.getItem("tracker")!).present
+  : defaultTrackerState;
 
 export const trackerSlice = createSlice({
   name: "tracker",

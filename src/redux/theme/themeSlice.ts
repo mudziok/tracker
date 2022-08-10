@@ -9,10 +9,14 @@ interface ThemeState {
   darkMode: boolean;
 }
 
-const initialThemeState: ThemeState = {
+const defaultThemeState: ThemeState = {
   name: "default",
   darkMode: true,
 };
+
+const initialThemeState: ThemeState = localStorage.getItem("theme")
+  ? JSON.parse(localStorage.getItem("theme")!)
+  : defaultThemeState;
 
 export const themeSlice = createSlice({
   name: "theme",
