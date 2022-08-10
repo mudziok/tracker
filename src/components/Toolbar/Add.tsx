@@ -1,11 +1,11 @@
 import { nanoid } from "nanoid";
 import { FC, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { addList, deleteTask } from "../../redux/tracker/trackerSlice";
-import Button from "../Button";
-import Card from "../Card";
-import Task from "../Task/Task";
-import List from "../List/List";
+import { addList, deleteTask } from "redux/tracker/trackerSlice";
+import Button from "components/Button";
+import Card from "components/Card";
+import Task from "components/Task/Task";
+import List from "components/List/List";
 import { FaPlus } from "react-icons/fa";
 import DropZone from "contexts/Drag/DropZone";
 

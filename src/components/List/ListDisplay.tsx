@@ -5,16 +5,16 @@ import {
   deleteList,
   editList,
   moveTask,
-} from "../../redux/tracker/trackerSlice";
-import Draggable from "../../contexts/Drag/Draggable";
-import DropZone from "../../contexts/Drag/DropZone";
-import Card from "../Card";
-import Task from "../Task/Task";
-import TaskPreview from "../Task/TaskPreview";
-import List from "./List";
-import Button from "../Button";
+} from "redux/tracker/trackerSlice";
+import Draggable from "contexts/Drag/Draggable";
+import DropZone from "contexts/Drag/DropZone";
+import Card from "components/Card";
+import Task from "components/Task/Task";
+import TaskPreview from "components/Task/TaskPreview";
+import List from "components/List/List";
+import Button from "components/Button";
 import styled from "styled-components";
-import { Input } from "../Input";
+import { Input } from "components/Input";
 import { nanoid } from "nanoid";
 
 const HeaderRow = styled.div`

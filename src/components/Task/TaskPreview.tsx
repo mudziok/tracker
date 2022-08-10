@@ -1,10 +1,10 @@
 import { FC, MouseEvent, ChangeEvent } from "react";
 import styled from "styled-components";
-import Card from "../Card";
-import Task from "./Task";
-import { Input, TextArea } from "../Input";
+import Card from "components/Card";
+import Task from "components/Task/Task";
+import { Input, TextArea } from "components/Input";
 import { useDispatch } from "react-redux";
-import { editTask } from "../../redux/tracker/trackerSlice";
+import { editTask } from "redux/tracker/trackerSlice";
 
 const FixedWidthCard = styled(Card)`
   width: 250px;

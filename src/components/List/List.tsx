@@ -1,4 +1,4 @@
-import Task from "../Task/Task";
+import Task from "components/Task/Task";
 
 interface List {
   id: string;

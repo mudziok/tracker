@@ -1,10 +1,10 @@
 import styled, { ThemeProvider } from "styled-components";
-import DragGroup from "./contexts/Drag/DragGroup";
-import ListDisplay from "./components/List/ListDisplay";
+import DragGroup from "contexts/Drag/DragGroup";
+import ListDisplay from "components/List/ListDisplay";
 import { useSelector } from "react-redux";
-import { Add, DarkMode, Undo, Trash, ChangeTheme } from "./components/Toolbar";
-import { selectDarkMode, selectTheme } from "./redux/theme/themeSlice";
-import { selectLists } from "./redux/tracker/trackerSlice";
+import { Add, DarkMode, Undo, Trash, ChangeTheme } from "components/Toolbar";
+import { selectDarkMode, selectTheme } from "redux/theme/themeSlice";
+import { selectLists } from "redux/tracker/trackerSlice";
 
 const StyledApp = styled.div`
   position: fixed;

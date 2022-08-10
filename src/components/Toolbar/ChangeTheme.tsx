@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { useDispatch } from "react-redux";
-import Card from "../Card";
+import Card from "components/Card";
 import { FaPaintBrush } from "react-icons/fa";
-import { nextTheme } from "../../redux/theme/themeSlice";
+import { nextTheme } from "redux/theme/themeSlice";
 import Button from "components/Button";
 
 export const ChangeTheme: FC = () => {
