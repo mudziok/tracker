@@ -3,14 +3,14 @@ import styled from "styled-components";
 import Card from "../Card/Card";
 
 interface DialogProps {
-  onBackgroundClick?: () => void,
-  children: React.ReactNode,
+  onBackgroundClick?: () => void;
+  children: React.ReactNode;
 }
 
 const Background = styled.div`
   position: fixed;
   inset: 0;
-  background-color: ${props => props.theme.primary + "40"};
+  background-color: ${(props) => props.theme.primary + "40"};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,19 +25,25 @@ const DialogCard = styled(Card)`
   }
 `;
 
-const Dialog:FC<DialogProps> = ({onBackgroundClick = ()=>{}, children}) => {
+const Dialog: FC<DialogProps> = ({
+  onBackgroundClick = () => {},
+  children,
+}) => {
   const backgroundRef = useRef(null);
 
-  const onClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === backgroundRef.current) { onBackgroundClick(); }
-  }, [onBackgroundClick]);
+  const onClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (e.target === backgroundRef.current) {
+        onBackgroundClick();
+      }
+    },
+    [onBackgroundClick]
+  );
 
   return (
     <Background onClick={onClick} ref={backgroundRef}>
-      <DialogCard>
-        {children}
-      </DialogCard>
-    </Background>  
+      <DialogCard>{children}</DialogCard>
+    </Background>
   );
 };
 

@@ -4,21 +4,21 @@ import DragGroup from "./DragGroup";
 import DropZone from "./DropZone";
 
 describe("Draggable", () => {
-
   const onDroppedInZone1 = jest.fn();
   const onDroppedInZone2 = jest.fn();
 
-  const renderTestSuite = () => render(
-    <DragGroup>
-      <DropZone onDroppedInZone={onDroppedInZone1}>
-        Dropzone 1
-        <Draggable><>element</></Draggable>
-      </DropZone>
-      <DropZone onDroppedInZone={onDroppedInZone2}>
-        Dropzone 2
-      </DropZone>
-    </DragGroup>
-  );
+  const renderTestSuite = () =>
+    render(
+      <DragGroup>
+        <DropZone onDroppedInZone={onDroppedInZone1}>
+          Dropzone 1
+          <Draggable>
+            <>element</>
+          </Draggable>
+        </DropZone>
+        <DropZone onDroppedInZone={onDroppedInZone2}>Dropzone 2</DropZone>
+      </DragGroup>
+    );
 
   it("is taken out of the DOM flow when picked up", () => {
     const { getByText } = renderTestSuite();

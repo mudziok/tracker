@@ -16,5 +16,5 @@ export const themes = {
     accent: "#696e6c",
     background: "#a7a7a7",
     roundness: "0",
-  }
+  },
 } as const;

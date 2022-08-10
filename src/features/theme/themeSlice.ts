@@ -11,22 +11,24 @@ interface ThemeState {
 
 const initialThemeState: ThemeState = {
   name: "default",
-  darkMode: true
-}
+  darkMode: true,
+};
 
 export const themeSlice = createSlice({
-  name: 'theme',
+  name: "theme",
   initialState: initialThemeState,
   reducers: {
     setDarkMode(state, action: PayloadAction<boolean>) {
       state.darkMode = action.payload;
     },
     nextTheme(state) {
-      const currentThemeIndex = themeNames.findIndex((themeName => themeName === state.name));
+      const currentThemeIndex = themeNames.findIndex(
+        (themeName) => themeName === state.name
+      );
       state.name = themeNames[(currentThemeIndex + 1) % themeNames.length];
-    }
+    },
   },
-})
+});
 
 export const selectTheme = (state: RootState) => themes[state.theme.name];
 

@@ -1,20 +1,20 @@
-import styled, { ThemeProvider } from 'styled-components'
-import DragGroup from './contexts/Drag/DragGroup';
-import ListDisplay from './components/List/ListDisplay';
-import { useSelector } from 'react-redux';
-import { RootState } from './store';
-import { Add, DarkMode, Undo, Trash, ChangeTheme } from './components/Toolbar';
-import { themes } from './features/theme/themes';
-import { selectTheme } from './features/theme/themeSlice';
+import styled, { ThemeProvider } from "styled-components";
+import DragGroup from "./contexts/Drag/DragGroup";
+import ListDisplay from "./components/List/ListDisplay";
+import { useSelector } from "react-redux";
+import { RootState } from "./store";
+import { Add, DarkMode, Undo, Trash, ChangeTheme } from "./components/Toolbar";
+import { themes } from "./features/theme/themes";
+import { selectTheme } from "./features/theme/themeSlice";
 
 const StyledApp = styled.div`
   position: fixed;
   inset: 0;
-  background-color: ${props => props.theme.background};
-  color: ${props => props.theme.primary};
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.primary};
   padding: 0.5em;
   overflow: auto;
-  
+
   transition-duration: 0.1s;
   transition-property: background-color, color, border-radius;
   * {
@@ -23,8 +23,8 @@ const StyledApp = styled.div`
   }
 
   * ::selection {
-    color: ${props => props.theme.background};
-    background: ${props => props.theme.accent};
+    color: ${(props) => props.theme.background};
+    background: ${(props) => props.theme.accent};
   }
 `;
 
@@ -37,17 +37,20 @@ const ToolbarStack = styled.div`
   display: flex;
   flex-direction: column;
 
-  div, button {
+  div,
+  button {
     aspect-ratio: 1;
   }
-`
+`;
 
 const App = () => {
   const lists = useSelector((state: RootState) => state.tracker.present.lists);
   const darkMode = useSelector<RootState>((state) => state.theme.darkMode);
   const theme = useSelector(selectTheme);
 
-  const listDisplays = lists.map(list => <ListDisplay key={list.id} {...list} />);
+  const listDisplays = lists.map((list) => (
+    <ListDisplay key={list.id} {...list} />
+  ));
 
   const darkTheme = {
     ...theme,
@@ -73,6 +76,6 @@ const App = () => {
       </StyledApp>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

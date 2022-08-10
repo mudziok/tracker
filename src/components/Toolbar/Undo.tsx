@@ -3,16 +3,18 @@ import { useDispatch } from "react-redux";
 import { undo } from "../../features/tracker/trackerSlice";
 import Button from "../Button/Button";
 import Card from "../Card/Card";
-import { FaUndo } from "react-icons/fa"
+import { FaUndo } from "react-icons/fa";
 
-export const Undo:FC = () => {
+export const Undo: FC = () => {
   const dispatch = useDispatch();
 
   const undoLastAction = () => dispatch(undo());
 
   return (
     <Card>
-      <Button fontSize="lg" buttonSize="full" onClick={undoLastAction}><FaUndo /></Button>
+      <Button fontSize="lg" buttonSize="full" onClick={undoLastAction}>
+        <FaUndo />
+      </Button>
     </Card>
   );
-}
+};
