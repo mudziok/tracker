@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { loadInitialState } from "redux/loadInitialState";
 import { RootState } from "redux/store";
 import { themes } from "./themes";
+
+const themeSliceName: string = "theme";
 
 const themeNames = Object.keys(themes) as Array<keyof typeof themes>;
 
@@ -9,17 +12,23 @@ interface ThemeState {
   darkMode: boolean;
 }
 
+const isThemeState = (o: any): o is ThemeState => {
+  return "name" in o && "darkMode" in o && themeNames.includes(o.name);
+};
+
 const defaultThemeState: ThemeState = {
   name: "default",
   darkMode: true,
 };
 
-const initialThemeState: ThemeState = localStorage.getItem("theme")
-  ? JSON.parse(localStorage.getItem("theme")!)
-  : defaultThemeState;
+const initialThemeState: ThemeState = loadInitialState(
+  themeSliceName,
+  isThemeState,
+  defaultThemeState
+);
 
 export const themeSlice = createSlice({
-  name: "theme",
+  name: themeSliceName,
   initialState: initialThemeState,
   reducers: {
     setDarkMode(state, action: PayloadAction<boolean>) {

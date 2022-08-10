@@ -4,6 +4,8 @@ import Task from "components/Task/Task";
 import { RootState } from "redux/store";
 import { undoable } from "redux/undoable";
 
+const trackerSliceName: string = "tracker";
+
 export interface TrackerState {
   lists: List[];
 }
@@ -45,12 +47,12 @@ export const defaultTrackerState: TrackerState = {
   ],
 };
 
-const initialTrackerState: TrackerState = localStorage.getItem("tracker")
-  ? JSON.parse(localStorage.getItem("tracker")!).present
+const initialTrackerState: TrackerState = localStorage.getItem(trackerSliceName)
+  ? JSON.parse(localStorage.getItem(trackerSliceName)!).present
   : defaultTrackerState;
 
 export const trackerSlice = createSlice({
-  name: "tracker",
+  name: trackerSliceName,
   initialState: initialTrackerState,
   reducers: {
     addTask: (state, action: PayloadAction<{ task: Task; list: List }>) => {
