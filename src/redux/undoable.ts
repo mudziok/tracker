@@ -3,21 +3,19 @@ import { AnyAction, createSlice, original, Slice } from "@reduxjs/toolkit";
 interface UndoableState<T> {
   past: Array<T>;
   present: T;
-  future: Array<T>;
 }
 
 export const undoable = <SliceState>(slice: Slice<SliceState>) => {
   const initialUndoableState: UndoableState<SliceState> = {
     past: [],
     present: slice.getInitialState(),
-    future: [],
   };
 
   const actionExistsInSlice = (action: AnyAction) => {
     const sliceActions = Object.values(slice.actions);
-    const sliceActionTypes = sliceActions.map(action => action.type);
+    const sliceActionTypes = sliceActions.map((action) => action.type);
     return sliceActionTypes.includes(action.type);
-  }
+  };
 
   return createSlice({
     name: "undoable",

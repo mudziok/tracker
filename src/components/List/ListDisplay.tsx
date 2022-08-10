@@ -5,16 +5,16 @@ import {
   deleteList,
   editList,
   moveTask,
-} from "../../features/tracker/trackerSlice";
+} from "../../redux/tracker/trackerSlice";
 import Draggable from "../../contexts/Drag/Draggable";
 import DropZone from "../../contexts/Drag/DropZone";
-import Card from "../Card/Card";
+import Card from "../Card";
 import Task from "../Task/Task";
 import TaskPreview from "../Task/TaskPreview";
 import List from "./List";
-import Button from "../Button/Button";
+import Button from "../Button";
 import styled from "styled-components";
-import { Input } from "../Input/Input";
+import { Input } from "../Input";
 import { nanoid } from "nanoid";
 
 const HeaderRow = styled.div`
@@ -37,13 +37,11 @@ const ListDisplay: FC<List> = (list) => {
     }
   };
 
-  const changeName = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(editList({ id: id, list: { ...list, name: e.target.value } }));
   };
 
-  const trashList = () => dispatch(deleteList({ id: id }));
-
-  const newTask = () => {
+  const addEmptyTask = () => {
     const emptyTask: Task = {
       id: nanoid(),
       name: "",
@@ -66,16 +64,20 @@ const ListDisplay: FC<List> = (list) => {
             size="lg"
             placeholder="List name"
             value={name}
-            onChange={changeName}
+            onChange={handleNameChange}
           />
         </HeaderRow>
         {draggableTasks}
         {tasks.length === 0 && (
-          <Button fontSize="lg" buttonSize="full" onClick={trashList}>
+          <Button
+            fontSize="lg"
+            buttonSize="full"
+            onClick={() => dispatch(deleteList({ id: id }))}
+          >
             Delete List
           </Button>
         )}
-        <Button fontSize="lg" buttonSize="full" onClick={newTask}>
+        <Button fontSize="lg" buttonSize="full" onClick={addEmptyTask}>
           New Task +
         </Button>
       </ListCard>

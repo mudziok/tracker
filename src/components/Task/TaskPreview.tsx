@@ -1,10 +1,10 @@
 import { FC, MouseEvent, ChangeEvent } from "react";
 import styled from "styled-components";
-import Card from "../Card/Card";
+import Card from "../Card";
 import Task from "./Task";
-import { Input, TextArea } from "../Input/Input";
+import { Input, TextArea } from "../Input";
 import { useDispatch } from "react-redux";
-import { editTask } from "../../features/tracker/trackerSlice";
+import { editTask } from "../../redux/tracker/trackerSlice";
 
 const FixedWidthCard = styled(Card)`
   width: 250px;
@@ -25,11 +25,11 @@ const TaskPreview: FC<Task> = (task) => {
 
   const handleMouseDown = (e: MouseEvent<any>) => e.stopPropagation();
 
-  const onNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(editTask({ id: id, task: { ...task, name: e.target.value } }));
   };
 
-  const onDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(
       editTask({ id: id, task: { ...task, description: e.target.value } })
     );
@@ -42,13 +42,13 @@ const TaskPreview: FC<Task> = (task) => {
           size="md"
           placeholder="Task name"
           value={name}
-          onChange={onNameChange}
+          onChange={handleNameChange}
           onMouseDown={handleMouseDown}
         />
         <TextArea
           placeholder="Task description"
           value={description}
-          onChange={onDescriptionChange}
+          onChange={handleDescriptionChange}
           onMouseDown={handleMouseDown}
         />
       </Side>

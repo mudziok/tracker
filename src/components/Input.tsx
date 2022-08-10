@@ -1,6 +1,6 @@
 import TextareaAutosize from "react-textarea-autosize";
 import styled from "styled-components";
-import Header from "../Header/Header";
+import Header from "./Header";
 
 export const Input = styled(Header).attrs<{ value: string }>((props) => ({
   as: "input",

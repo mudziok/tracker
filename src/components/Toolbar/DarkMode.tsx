@@ -1,14 +1,13 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Button from "../Button/Button";
-import Card from "../Card/Card";
+import Button from "../Button";
+import Card from "../Card";
 import { FaMoon, FaSun } from "react-icons/fa";
-import { RootState } from "../../store";
-import { setDarkMode } from "../../features/theme/themeSlice";
+import { selectDarkMode, setDarkMode } from "../../redux/theme/themeSlice";
 
 export const DarkMode: FC = () => {
   const dispatch = useDispatch();
-  const darkMode = useSelector<RootState>((state) => state.theme.darkMode);
+  const darkMode = useSelector(selectDarkMode);
 
   const toggleDarkMode = () => dispatch(setDarkMode(!darkMode));
 

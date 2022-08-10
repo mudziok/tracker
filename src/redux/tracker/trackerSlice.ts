@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import List from "../../components/List/List";
 import Task from "../../components/Task/Task";
-import { RootState } from "../../store";
+import { RootState } from "../store";
 import { undoable } from "../undoable";
 
 export interface TrackerState {

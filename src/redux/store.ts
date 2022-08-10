@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { themeSlice } from "./features/theme/themeSlice";
-import { undoableTrackerSlice } from "./features/tracker/trackerSlice";
+import { themeSlice } from "./theme/themeSlice";
+import { undoableTrackerSlice } from "./tracker/trackerSlice";
 
 export const store = configureStore({
   reducer: {
