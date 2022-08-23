@@ -7,7 +7,7 @@ const themeSliceName: string = "theme";
 
 const themeNames = Object.keys(themes) as Array<keyof typeof themes>;
 
-interface ThemeState {
+export interface ThemeState {
   name: keyof typeof themes;
   darkMode: boolean;
 }
