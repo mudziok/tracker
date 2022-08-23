@@ -17,4 +17,10 @@ export const themes = {
     background: "#a7a7a7",
     roundness: "0",
   },
+  strawberry: {
+    primary: "#7e253e",
+    accent: "#d55580",
+    background: "#ffa5ad",
+    roundness: "1.5rem",
+  },
 } as const;
