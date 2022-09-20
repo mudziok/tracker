@@ -28,11 +28,11 @@ describe('Draggable', () => {
   it('is taken out of the DOM flow when picked up', () => {
     const { getByText } = renderTestSuite();
 
-    expect(getByText('Dropzone 1')).toContain(getByText('element'));
+    expect(getByText('Dropzone 1').textContent).toContain('element');
 
     fireEvent.mouseDown(getByText('element'));
     expect(getByText('element')).toBeDefined();
-    expect(getByText('Dropzone 1')).not.toContain(getByText('element'));
+    expect(getByText('Dropzone 1').textContent).not.toContain('element');
   });
 
   it('can be picked up and dropped in the same zone', () => {
