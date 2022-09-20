@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import List from "components/List/List";
-import Task from "components/Task/Task";
-import { RootState } from "redux/store";
-import { undoable } from "redux/undoable";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import List from 'components/List/List';
+import Task from 'components/Task/Task';
+import { RootState } from 'redux/store';
+import { undoable } from 'redux/undoable';
 
-const trackerSliceName: string = "tracker";
+const trackerSliceName = 'tracker';
 
 export interface TrackerState {
   lists: List[];
@@ -13,35 +13,35 @@ export interface TrackerState {
 export const defaultTrackerState: TrackerState = {
   lists: [
     {
-      id: "1",
-      name: "Todo",
+      id: '1',
+      name: 'Todo',
       tasks: [
-        { id: "1", name: "Mock name", description: "Mock description" },
-        { id: "2", name: "Mock name 2", description: "Mock description 2" },
+        { id: '1', name: 'Mock name', description: 'Mock description' },
+        { id: '2', name: 'Mock name 2', description: 'Mock description 2' },
       ],
     },
     {
-      id: "2",
-      name: "In Progress",
+      id: '2',
+      name: 'In Progress',
       tasks: [
-        { id: "3", name: "Mock name 3", description: "Mock description 3" },
-        { id: "4", name: "Mock name 4", description: "Mock description 4" },
+        { id: '3', name: 'Mock name 3', description: 'Mock description 3' },
+        { id: '4', name: 'Mock name 4', description: 'Mock description 4' },
       ],
     },
     {
-      id: "3",
-      name: "In QA",
+      id: '3',
+      name: 'In QA',
       tasks: [
-        { id: "5", name: "Mock name 3", description: "Mock description 3" },
-        { id: "6", name: "Mock name 4", description: "Mock description 4" },
+        { id: '5', name: 'Mock name 3', description: 'Mock description 3' },
+        { id: '6', name: 'Mock name 4', description: 'Mock description 4' },
       ],
     },
     {
-      id: "4",
-      name: "Done",
+      id: '4',
+      name: 'Done',
       tasks: [
-        { id: "7", name: "Mock name 3", description: "Mock description 3" },
-        { id: "8", name: "Mock name 4", description: "Mock description 4" },
+        { id: '7', name: 'Mock name 3', description: 'Mock description 3' },
+        { id: '8', name: 'Mock name 4', description: 'Mock description 4' },
       ],
     },
   ],
@@ -59,7 +59,7 @@ export const trackerSlice = createSlice({
       const { task: newTask, list: targetList } = { ...action.payload };
 
       const destinationList = state.lists.find(
-        (list) => list.id === targetList.id
+        (list) => list.id === targetList.id,
       );
       if (destinationList) {
         destinationList.tasks.push(newTask);
@@ -74,7 +74,7 @@ export const trackerSlice = createSlice({
       }));
 
       const destinationList = state.lists.find(
-        (list) => list.id === targetList.id
+        (list) => list.id === targetList.id,
       );
       if (destinationList) {
         destinationList.tasks.push(movedTask);
@@ -101,7 +101,7 @@ export const trackerSlice = createSlice({
     editList(state, action: PayloadAction<{ id: string; list: List }>) {
       const { id, list: editedList } = { ...action.payload };
       state.lists = state.lists.map((list) =>
-        list.id === id ? editedList : list
+        list.id === id ? editedList : list,
       );
     },
     deleteList(state, action: PayloadAction<{ id: string }>) {

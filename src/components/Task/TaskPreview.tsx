@@ -1,10 +1,10 @@
-import { FC, MouseEvent, ChangeEvent } from "react";
-import styled from "styled-components";
-import Card from "components/Card";
-import Task from "components/Task/Task";
-import { Input, TextArea } from "components/Input";
-import { useDispatch } from "react-redux";
-import { editTask } from "redux/tracker/trackerSlice";
+import { FC, MouseEvent, ChangeEvent } from 'react';
+import styled from 'styled-components';
+import Card from 'components/Card';
+import Task from 'components/Task/Task';
+import { Input, TextArea } from 'components/Input';
+import { useDispatch } from 'react-redux';
+import { editTask } from 'redux/tracker/trackerSlice';
 
 const FixedWidthCard = styled(Card)`
   width: 250px;
@@ -31,7 +31,7 @@ const TaskPreview: FC<Task> = (task) => {
 
   const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(
-      editTask({ id: id, task: { ...task, description: e.target.value } })
+      editTask({ id: id, task: { ...task, description: e.target.value } }),
     );
   };
 

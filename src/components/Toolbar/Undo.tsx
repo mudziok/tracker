@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { useDispatch } from "react-redux";
-import { undo } from "redux/tracker/trackerSlice";
-import Button from "components/Button";
-import Card from "components/Card";
-import { FaUndo } from "react-icons/fa";
+import { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { undo } from 'redux/tracker/trackerSlice';
+import Button from 'components/Button';
+import Card from 'components/Card';
+import { FaUndo } from 'react-icons/fa';
 
 export const Undo: FC = () => {
   const dispatch = useDispatch();

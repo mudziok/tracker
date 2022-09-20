@@ -1,4 +1,4 @@
-import { AnyAction, createSlice, original, Slice } from "@reduxjs/toolkit";
+import { AnyAction, createSlice, original, Slice } from '@reduxjs/toolkit';
 
 interface UndoableState<T> {
   past: Array<T>;
@@ -18,7 +18,7 @@ export const undoable = <SliceState>(slice: Slice<SliceState>) => {
   };
 
   return createSlice({
-    name: "undoable",
+    name: 'undoable',
     initialState: initialUndoableState,
     reducers: {
       undo: (state) => {
@@ -33,7 +33,7 @@ export const undoable = <SliceState>(slice: Slice<SliceState>) => {
         state.past.push(original(state.present)!);
         state.present = slice.reducer(
           original(state.present) as any,
-          action
+          action,
         ) as any;
       });
     },

@@ -1,5 +1,5 @@
-import { FC, useCallback, useContext } from "react";
-import { DragGroupContext } from "./DragGroup";
+import { FC, useCallback, useContext } from 'react';
+import { DragGroupContext } from './DragGroup';
 
 interface DropZoneProps {
   children: React.ReactNode;
@@ -13,6 +13,7 @@ const DropZone: FC<DropZoneProps> = ({ children, onDroppedInZone }) => {
     if (dragged) onDroppedInZone(dragged);
   }, [dragged, onDroppedInZone]);
 
+  // eslint-disable-next-line jsx-a11y/no-static-element-interactions
   return <div onMouseUp={onMouseUp}>{children}</div>;
 };
 

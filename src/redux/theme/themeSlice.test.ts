@@ -1,23 +1,23 @@
-import { setDarkMode, themeSlice, ThemeState } from "redux/theme/themeSlice";
+import { setDarkMode, themeSlice, ThemeState } from 'redux/theme/themeSlice';
 
 const reducer = themeSlice.reducer;
 
-describe("Theme Store", () => {
+describe('Theme Store', () => {
   const initialState: ThemeState = {
-    name: "default",
+    name: 'default',
     darkMode: true,
   };
 
-  it("can toggle dark mode", () => {
+  it('can toggle dark mode', () => {
     const toggledState = reducer(
       initialState,
-      setDarkMode(!initialState.darkMode)
+      setDarkMode(!initialState.darkMode),
     );
     expect(toggledState.darkMode).toEqual(!initialState.darkMode);
 
     const revertedState = reducer(
       toggledState,
-      setDarkMode(!toggledState.darkMode)
+      setDarkMode(!toggledState.darkMode),
     );
     expect(revertedState.darkMode).toEqual(initialState.darkMode);
   });

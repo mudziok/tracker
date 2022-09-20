@@ -1,9 +1,9 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { loadInitialState } from "redux/loadInitialState";
-import { RootState } from "redux/store";
-import { themes } from "./themes";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { loadInitialState } from 'redux/loadInitialState';
+import { RootState } from 'redux/store';
+import { themes } from './themes';
 
-const themeSliceName: string = "theme";
+const themeSliceName = 'theme';
 
 const themeNames = Object.keys(themes) as Array<keyof typeof themes>;
 
@@ -13,18 +13,18 @@ export interface ThemeState {
 }
 
 const isThemeState = (o: any): o is ThemeState => {
-  return "name" in o && "darkMode" in o && themeNames.includes(o.name);
+  return 'name' in o && 'darkMode' in o && themeNames.includes(o.name);
 };
 
 const defaultThemeState: ThemeState = {
-  name: "default",
+  name: 'default',
   darkMode: true,
 };
 
 const initialThemeState: ThemeState = loadInitialState(
   themeSliceName,
   isThemeState,
-  defaultThemeState
+  defaultThemeState,
 );
 
 export const themeSlice = createSlice({
@@ -36,7 +36,7 @@ export const themeSlice = createSlice({
     },
     nextTheme(state) {
       const currentThemeIndex = themeNames.findIndex(
-        (themeName) => themeName === state.name
+        (themeName) => themeName === state.name,
       );
       state.name = themeNames[(currentThemeIndex + 1) % themeNames.length];
     },

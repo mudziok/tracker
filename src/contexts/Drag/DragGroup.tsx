@@ -1,6 +1,6 @@
-import React, { FC, useCallback, useState } from "react";
-import styled from "styled-components";
-import MouseFollow from "./MouseFollow";
+import React, { FC, useCallback, useState } from 'react';
+import styled from 'styled-components';
+import MouseFollow from './MouseFollow';
 
 interface DragGroupProps {
   children?: React.ReactNode;
@@ -36,7 +36,7 @@ const DragGroup: FC<DragGroupProps> = ({ children }) => {
       setDragged(component);
       setDraggedInfo(info);
     },
-    []
+    [],
   );
 
   const onReleased = useCallback(() => {
