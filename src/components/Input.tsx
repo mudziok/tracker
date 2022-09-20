@@ -1,12 +1,12 @@
-import TextareaAutosize from "react-textarea-autosize";
-import styled from "styled-components";
-import Header from "components/Header";
+import TextareaAutosize from 'react-textarea-autosize';
+import styled from 'styled-components';
+import Header from 'components/Header';
 
 export const Input = styled(Header).attrs<{ value: string }>((props) => ({
-  as: "input",
-  type: "text",
+  as: 'input',
+  type: 'text',
   value: props.value,
-  spellCheck: "false",
+  spellCheck: 'false',
 }))<{ value: string }>`
   outline: none;
   width: 100%;
@@ -24,8 +24,8 @@ export const Input = styled(Header).attrs<{ value: string }>((props) => ({
   }
 `;
 
-export const TextArea = styled(TextareaAutosize).attrs((props) => ({
-  spellCheck: "false",
+export const TextArea = styled(TextareaAutosize).attrs(() => ({
+  spellCheck: 'false',
 }))`
   outline: none;
   width: 100%;
