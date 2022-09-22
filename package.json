@@ -27,9 +27,11 @@
     "build": "tsc && vite build",
     "serve": "vite preview",
     "test": "vitest",
-    "lint": "eslint --config .eslintrc.js \"src/**/*.{ts,tsx}\"",
-    "pretty": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json}\"",
-    "fix": "yarn lint && yarn pretty"
+    "lint": "eslint --config .eslintrc.js \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint:fix": "eslint --fix --config .eslintrc.js \"src/**/*.{js,jsx,ts,tsx}\"",
+    "pretty": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json}\"",
+    "pretty:fix": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json}\"",
+    "fix": "yarn lint:fix && yarn pretty:fix"
   },
   "browserslist": {
     "production": [
