@@ -1,26 +1,81 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled, { ThemeProvider } from 'styled-components';
+import DragGroup from 'contexts/Drag/DragGroup';
+import ListDisplay from 'components/List/ListDisplay';
+import { useSelector } from 'react-redux';
+import { Add, DarkMode, Undo, Trash, ChangeTheme } from 'components/Toolbar';
+import { selectDarkMode, selectTheme } from 'redux/theme/themeSlice';
+import { selectLists } from 'redux/tracker/trackerSlice';
 
-function App() {
+const StyledApp = styled.div`
+  position: fixed;
+  inset: 0;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.primary};
+  padding: 0.5em;
+  overflow: auto;
+
+  transition: background-color 0.1s, color 0.1s, border-radius 0.1s;
+  * {
+    transition: background-color 0.1s, color 0.1s, border-radius 0.1s;
+  }
+
+  user-select: none;
+  * ::selection {
+    color: ${(props) => props.theme.background};
+    background: ${(props) => props.theme.accent};
+  }
+`;
+
+const ListsContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+`;
+
+const ToolbarStack = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+
+  div,
+  button {
+    aspect-ratio: 1;
+  }
+`;
+
+const App = () => {
+  const lists = useSelector(selectLists);
+  const darkMode = useSelector(selectDarkMode);
+  const theme = useSelector(selectTheme);
+
+  const listDisplays = lists.map((list) => (
+    <ListDisplay key={list.id} {...list} />
+  ));
+
+  const darkTheme = {
+    ...theme,
+    primary: theme.background,
+    background: theme.primary,
+  } as const;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={darkMode ? darkTheme : theme}>
+      <StyledApp>
+        <DragGroup>
+          <ListsContainer>
+            <ToolbarStack>
+              <Add />
+              <Undo />
+              <Trash />
+              <DarkMode />
+              <ChangeTheme />
+            </ToolbarStack>
+            {listDisplays}
+          </ListsContainer>
+        </DragGroup>
+      </StyledApp>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
