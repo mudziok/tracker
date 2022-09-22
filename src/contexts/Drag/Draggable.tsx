@@ -1,11 +1,4 @@
-import {
-  FC,
-  useCallback,
-  useContext,
-  useRef,
-  useEffect,
-  MouseEvent,
-} from 'react';
+import { FC, useCallback, useContext, useRef, useEffect } from 'react';
 import { DragGroupContext, Offset } from './DragGroup';
 
 interface DraggableProps {
@@ -18,7 +11,7 @@ const Draggable: FC<DraggableProps> = ({ children }) => {
     useContext(DragGroupContext);
 
   const handleMouseDown = useCallback(
-    (e: MouseEvent) => {
+    (e: React.MouseEvent) => {
       const mousePosition: Offset = { left: e.pageX, top: e.pageY };
       if (elementRef.current) {
         const componentRect = elementRef.current.getBoundingClientRect();
@@ -32,7 +25,7 @@ const Draggable: FC<DraggableProps> = ({ children }) => {
   );
 
   useEffect(() => {
-    const handleMovement = (e: any) => {
+    const handleMovement = (e: MouseEvent) => {
       const mousePosition: Offset = { left: e.pageX, top: e.pageY };
       if (elementRef.current && dragged) {
         setMousePosition(mousePosition);
