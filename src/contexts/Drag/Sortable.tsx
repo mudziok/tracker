@@ -62,9 +62,7 @@ export function Sortable<T extends { id: string }>({
               mousePosition &&
               isInsideElement(mousePosition, refs.current[entry.id])
                 ? (rect.height || 0) + 2 * gap
-                : entry.id !== dragged?.props.id
-                ? gap
-                : 0
+                : gap
             }
             ref={(ref) => {
               refs.current[entry.id] = ref;
