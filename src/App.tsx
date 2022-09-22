@@ -21,6 +21,7 @@ const StyledApp = styled.div`
     transition-property: background-color, color, border-radius;
   } */
 
+  user-select: none;
   * ::selection {
     color: ${(props) => props.theme.background};
     background: ${(props) => props.theme.accent};
