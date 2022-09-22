@@ -14,7 +14,8 @@ export const LeadingMargin = styled.div.attrs<{
   ${(props) =>
     props.animate &&
     css`
-      transition: padding 0.1s ease-in-out;
+      transition: background-color 0.1s, color 0.1s, border-radius 0.1s,
+        padding 0.1s;
     `}
 `;
 

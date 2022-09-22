@@ -14,12 +14,10 @@ const StyledApp = styled.div`
   padding: 0.5em;
   overflow: auto;
 
-  /* transition-duration: 0.1s;
-  transition-property: background-color, color, border-radius;
+  transition: background-color 0.1s, color 0.1s, border-radius 0.1s;
   * {
-    transition-duration: 0.1s;
-    transition-property: background-color, color, border-radius;
-  } */
+    transition: background-color 0.1s, color 0.1s, border-radius 0.1s;
+  }
 
   user-select: none;
   * ::selection {
