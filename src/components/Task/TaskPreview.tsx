@@ -19,7 +19,7 @@ const TaskPreview: FC<Task> = (task) => {
   const { id, name, description } = task;
   const dispatch = useDispatch();
 
-  const handleMouseDown = (e: MouseEvent<unknown>) => e.stopPropagation();
+  const handleMouseDown = (e: MouseEvent) => e.stopPropagation();
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(editTask({ id: id, task: { ...task, name: e.target.value } }));

@@ -14,18 +14,15 @@ export const DropZone: FC<DropZoneProps> = ({
   onDragMove,
   onMouseEnter,
 }) => {
-  const { dragged, setDragged, setRect, setMousePosition } =
-    useContext(DragGroupContext);
+  const { dragged, releaseDragged } = useContext(DragGroupContext);
 
   const onMouseUp = useCallback(
     (e: MouseEvent<HTMLElement>) => {
       e.stopPropagation();
-      setDragged(null);
-      setRect(null);
-      setMousePosition(null);
       if (dragged) onDroppedInZone(dragged);
+      releaseDragged();
     },
-    [dragged, onDroppedInZone, setDragged, setMousePosition, setRect],
+    [dragged, onDroppedInZone, releaseDragged],
   );
 
   const handleMouseMove = useCallback(

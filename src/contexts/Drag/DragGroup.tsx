@@ -19,6 +19,7 @@ interface DragGroupContextProps {
   setDragged: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
   setRect: React.Dispatch<React.SetStateAction<DOMRect | null>>;
   setMousePosition: React.Dispatch<React.SetStateAction<Offset | null>>;
+  releaseDragged: () => void;
 }
 
 export const DragGroupContext = React.createContext<DragGroupContextProps>({
@@ -28,6 +29,7 @@ export const DragGroupContext = React.createContext<DragGroupContextProps>({
   setDragged: () => {},
   setRect: () => {},
   setMousePosition: () => {},
+  releaseDragged: () => {},
 });
 
 const DragGroupDiv = styled.div`
@@ -40,7 +42,7 @@ const DragGroup: FC<DragGroupProps> = ({ children }) => {
   const [rect, setRect] = useState<DOMRect | null>(null);
   const [mousePosition, setMousePosition] = useState<Offset | null>(null);
 
-  const onReleased = useCallback(() => {
+  const releaseDragged = useCallback(() => {
     setDragged(null);
     setRect(null);
     setMousePosition(null);
@@ -55,9 +57,10 @@ const DragGroup: FC<DragGroupProps> = ({ children }) => {
         setDragged,
         setRect,
         setMousePosition,
+        releaseDragged,
       }}
     >
-      <DragGroupDiv onMouseUp={onReleased}>
+      <DragGroupDiv onMouseUp={releaseDragged}>
         {children}
         {dragged && rect && mousePosition && (
           <MouseFollow rect={rect} mousePosition={mousePosition}>
