@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import DropZone from '../../contexts/Drag/DropZone';
+import { DropZone } from '../../contexts/Drag/DropZone';
 import { deleteTask } from '../../redux/tracker/trackerSlice';
 import Card from '../Card';
 import Header from '../Header';

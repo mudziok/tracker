@@ -1,10 +1,11 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import styled from 'styled-components';
-import { ComponentInfo, Offset } from './DragGroup';
+import { Offset } from './DragGroup';
 
 interface MouseFollowProps {
   children: React.ReactNode;
-  initialInfo: ComponentInfo;
+  rect: DOMRect;
+  mousePosition: Offset;
 }
 
 const Positioner = styled('div').attrs<{ offset: Offset }>((props) => ({
@@ -18,28 +19,16 @@ const Positioner = styled('div').attrs<{ offset: Offset }>((props) => ({
   pointer-events: none;
 `;
 
-const MouseFollow: FC<MouseFollowProps> = ({ children, initialInfo }) => {
-  const [currentMousePosition, setCurrentMousePosition] = useState<Offset>(
-    initialInfo.mousePosition,
-  );
-
-  useEffect(() => {
-    const handleMovement = (e: MouseEvent) =>
-      setCurrentMousePosition({ left: e.pageX, top: e.pageY });
-
-    document.addEventListener('mousemove', handleMovement);
-    return () => document.removeEventListener('mousemove', handleMovement);
-  }, []);
+const MouseFollow: FC<MouseFollowProps> = ({
+  children,
+  rect,
+  mousePosition,
+}) => {
+  const [initialMousePosition] = useState(mousePosition);
 
   const offset: Offset = {
-    left:
-      currentMousePosition.left -
-      initialInfo.mousePosition.left +
-      initialInfo.componentRect.left,
-    top:
-      currentMousePosition.top -
-      initialInfo.mousePosition.top +
-      initialInfo.componentRect.top,
+    left: mousePosition.left - initialMousePosition.left + rect.left,
+    top: mousePosition.top - initialMousePosition.top + rect.top,
   };
 
   return <Positioner offset={offset}>{children}</Positioner>;

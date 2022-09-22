@@ -1,5 +1,12 @@
-import { FC, useCallback, useContext, useRef, MouseEvent } from 'react';
-import { ComponentInfo, DragGroupContext, Offset } from './DragGroup';
+import {
+  FC,
+  useCallback,
+  useContext,
+  useRef,
+  useEffect,
+  MouseEvent,
+} from 'react';
+import { DragGroupContext, Offset } from './DragGroup';
 
 interface DraggableProps {
   children: JSX.Element;
@@ -7,26 +14,40 @@ interface DraggableProps {
 
 const Draggable: FC<DraggableProps> = ({ children }) => {
   const elementRef = useRef<HTMLDivElement>(null);
-  const { dragged, onPicked } = useContext(DragGroupContext);
+  const { dragged, setDragged, setRect, setMousePosition } =
+    useContext(DragGroupContext);
 
-  const handleOnMouseDown = useCallback(
-    (e: MouseEvent<HTMLDivElement>) => {
+  const handleMouseDown = useCallback(
+    (e: MouseEvent) => {
       const mousePosition: Offset = { left: e.pageX, top: e.pageY };
       if (elementRef.current) {
         const componentRect = elementRef.current.getBoundingClientRect();
 
-        const info: ComponentInfo = { componentRect, mousePosition };
-        onPicked(children, info);
+        setDragged(children);
+        setRect(componentRect);
+        setMousePosition(mousePosition);
       }
     },
-    [children, onPicked],
+    [children, setDragged, setMousePosition, setRect],
   );
+
+  useEffect(() => {
+    const handleMovement = (e: any) => {
+      const mousePosition: Offset = { left: e.pageX, top: e.pageY };
+      if (elementRef.current && dragged) {
+        setMousePosition(mousePosition);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMovement);
+    return () => window.removeEventListener('mousemove', handleMovement);
+  }, [dragged, setMousePosition]);
 
   if (dragged === children) return null;
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div onMouseDown={handleOnMouseDown} ref={elementRef}>
+    <div onMouseDown={handleMouseDown} ref={elementRef}>
       {children}
     </div>
   );
