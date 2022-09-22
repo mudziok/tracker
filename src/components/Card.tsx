@@ -6,7 +6,6 @@ const Card = styled('div')`
   border-radius: ${(props) => props.theme.roundness};
 
   padding: 0.5rem;
-  margin: 0.5rem;
 `;
 
 export default Card;

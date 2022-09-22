@@ -7,7 +7,6 @@ import {
   moveTask,
 } from 'redux/tracker/trackerSlice';
 import Draggable from 'contexts/Drag/Draggable';
-import DropZone from 'contexts/Drag/DropZone';
 import Card from 'components/Card';
 import Task from 'components/Task/Task';
 import TaskPreview from 'components/Task/TaskPreview';
@@ -16,6 +15,8 @@ import Button from 'components/Button';
 import styled from 'styled-components';
 import { Input } from 'components/Input';
 import { nanoid } from 'nanoid';
+import { Sortable } from 'contexts/Drag/Sortable';
+import { DropZone } from 'contexts/Drag/DropZone';
 
 const HeaderRow = styled.div`
   margin: 0.5em;
@@ -26,19 +27,29 @@ export const ListCard = styled(Card)`
   width: calc(250px + 4rem);
 `;
 
+const TaskContainer = styled.div`
+  margin: 0.5em;
+`;
+
+const DraggableTask: FC<Task> = (task) => (
+  <Draggable>
+    <TaskPreview {...task} />
+  </Draggable>
+);
+
 const ListDisplay: FC<List> = (list) => {
   const { id, name, tasks } = list;
   const dispatch = useDispatch();
 
-  const droppedInsideHandled = (dropped: JSX.Element) => {
+  const droppedInsideHandled = (dropped: JSX.Element, position?: number) => {
     if (dropped.type === TaskPreview) {
       const task = dropped.props as Task;
-      dispatch(moveTask({ task: task, list: list }));
+      dispatch(moveTask({ task, list, position }));
     }
   };
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(editList({ id: id, list: { ...list, name: e.target.value } }));
+    dispatch(editList({ id, list: { ...list, name: e.target.value } }));
   };
 
   const addEmptyTask = () => {
@@ -47,18 +58,12 @@ const ListDisplay: FC<List> = (list) => {
       name: '',
       description: '',
     };
-    dispatch(addTask({ task: emptyTask, list: list }));
+    dispatch(addTask({ task: emptyTask, list }));
   };
 
-  const draggableTasks = tasks.map((task) => (
-    <Draggable key={task.id}>
-      <TaskPreview {...task} />
-    </Draggable>
-  ));
-
   return (
-    <DropZone onDroppedInZone={droppedInsideHandled}>
-      <ListCard>
+    <ListCard>
+      <DropZone onDroppedInZone={droppedInsideHandled}>
         <HeaderRow>
           <Input
             size="lg"
@@ -67,7 +72,13 @@ const ListDisplay: FC<List> = (list) => {
             onChange={handleNameChange}
           />
         </HeaderRow>
-        {draggableTasks}
+        <TaskContainer>
+          <Sortable
+            Component={DraggableTask}
+            entries={tasks}
+            onDroppedInZone={droppedInsideHandled}
+          />
+        </TaskContainer>
         {tasks.length === 0 && (
           <Button
             fontSize="lg"
@@ -80,8 +91,8 @@ const ListDisplay: FC<List> = (list) => {
         <Button fontSize="lg" buttonSize="full" onClick={addEmptyTask}>
           New Task +
         </Button>
-      </ListCard>
-    </DropZone>
+      </DropZone>
+    </ListCard>
   );
 };
 

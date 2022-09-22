@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import Draggable from './Draggable';
 import DragGroup from './DragGroup';
-import DropZone from './DropZone';
+import { DropZone } from './DropZone';
 import { expect } from 'vitest';
 
 describe('Draggable', () => {

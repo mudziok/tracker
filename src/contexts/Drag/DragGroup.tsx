@@ -14,12 +14,22 @@ export interface ComponentInfo {
 
 interface DragGroupContextProps {
   dragged: JSX.Element | null;
-  onPicked: (component: JSX.Element, info: ComponentInfo) => void;
+  rect: DOMRect | null;
+  mousePosition: Offset | null;
+  setDragged: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
+  setRect: React.Dispatch<React.SetStateAction<DOMRect | null>>;
+  setMousePosition: React.Dispatch<React.SetStateAction<Offset | null>>;
+  releaseDragged: () => void;
 }
 
 export const DragGroupContext = React.createContext<DragGroupContextProps>({
   dragged: null,
-  onPicked: () => {},
+  rect: null,
+  mousePosition: null,
+  setDragged: () => {},
+  setRect: () => {},
+  setMousePosition: () => {},
+  releaseDragged: () => {},
 });
 
 const DragGroupDiv = styled.div`
@@ -29,27 +39,33 @@ const DragGroupDiv = styled.div`
 
 const DragGroup: FC<DragGroupProps> = ({ children }) => {
   const [dragged, setDragged] = useState<JSX.Element | null>(null);
-  const [draggedInfo, setDraggedInfo] = useState<ComponentInfo | null>(null);
+  const [rect, setRect] = useState<DOMRect | null>(null);
+  const [mousePosition, setMousePosition] = useState<Offset | null>(null);
 
-  const onPicked = useCallback(
-    (component: JSX.Element, info: ComponentInfo) => {
-      setDragged(component);
-      setDraggedInfo(info);
-    },
-    [],
-  );
-
-  const onReleased = useCallback(() => {
+  const releaseDragged = useCallback(() => {
     setDragged(null);
-    setDraggedInfo(null);
+    setRect(null);
+    setMousePosition(null);
   }, []);
 
   return (
-    <DragGroupContext.Provider value={{ dragged, onPicked }}>
-      <DragGroupDiv onMouseUp={onReleased}>
+    <DragGroupContext.Provider
+      value={{
+        dragged,
+        rect,
+        mousePosition,
+        setDragged,
+        setRect,
+        setMousePosition,
+        releaseDragged,
+      }}
+    >
+      <DragGroupDiv onMouseUp={releaseDragged}>
         {children}
-        {dragged && draggedInfo && (
-          <MouseFollow initialInfo={draggedInfo}>{dragged}</MouseFollow>
+        {dragged && rect && mousePosition && (
+          <MouseFollow rect={rect} mousePosition={mousePosition}>
+            {dragged}
+          </MouseFollow>
         )}
       </DragGroupDiv>
     </DragGroupContext.Provider>

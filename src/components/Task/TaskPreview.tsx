@@ -9,10 +9,6 @@ import { editTask } from 'redux/tracker/trackerSlice';
 const FixedWidthCard = styled(Card)`
   width: 250px;
   cursor: grab;
-
-  p {
-    margin: 0.5em 0;
-  }
 `;
 
 const Side = styled.div`
@@ -23,7 +19,7 @@ const TaskPreview: FC<Task> = (task) => {
   const { id, name, description } = task;
   const dispatch = useDispatch();
 
-  const handleMouseDown = (e: MouseEvent<any>) => e.stopPropagation();
+  const handleMouseDown = (e: MouseEvent) => e.stopPropagation();
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(editTask({ id: id, task: { ...task, name: e.target.value } }));

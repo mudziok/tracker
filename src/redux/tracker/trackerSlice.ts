@@ -65,8 +65,15 @@ export const trackerSlice = createSlice({
         destinationList.tasks.push(newTask);
       }
     },
-    moveTask: (state, action: PayloadAction<{ task: Task; list: List }>) => {
-      const { task: movedTask, list: targetList } = { ...action.payload };
+    moveTask: (
+      state,
+      action: PayloadAction<{ task: Task; list: List; position?: number }>,
+    ) => {
+      const {
+        task: movedTask,
+        list: targetList,
+        position,
+      } = { ...action.payload };
 
       state.lists = state.lists.map((list) => ({
         ...list,
@@ -77,7 +84,11 @@ export const trackerSlice = createSlice({
         (list) => list.id === targetList.id,
       );
       if (destinationList) {
-        destinationList.tasks.push(movedTask);
+        destinationList.tasks.splice(
+          position !== undefined ? position : destinationList.tasks.length,
+          0,
+          movedTask,
+        );
       }
     },
     editTask: (state, action: PayloadAction<{ id: string; task: Task }>) => {

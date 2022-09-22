@@ -14,13 +14,12 @@ const StyledApp = styled.div`
   padding: 0.5em;
   overflow: auto;
 
-  transition-duration: 0.1s;
-  transition-property: background-color, color, border-radius;
+  transition: background-color 0.1s, color 0.1s, border-radius 0.1s;
   * {
-    transition-duration: 0.1s;
-    transition-property: background-color, color, border-radius;
+    transition: background-color 0.1s, color 0.1s, border-radius 0.1s;
   }
 
+  user-select: none;
   * ::selection {
     color: ${(props) => props.theme.background};
     background: ${(props) => props.theme.accent};
@@ -30,11 +29,13 @@ const StyledApp = styled.div`
 const ListsContainer = styled.div`
   display: flex;
   align-items: flex-start;
+  gap: 0.5em;
 `;
 
 const ToolbarStack = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 0.5em;
 
   div,
   button {
