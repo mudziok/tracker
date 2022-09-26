@@ -14,11 +14,6 @@ const StyledApp = styled.div`
   padding: 0.5em;
   overflow: auto;
 
-  transition: background-color 0.1s, color 0.1s, border-radius 0.1s;
-  * {
-    transition: background-color 0.1s, color 0.1s, border-radius 0.1s;
-  }
-
   user-select: none;
   * ::selection {
     color: ${(props) => props.theme.background};
@@ -64,13 +59,15 @@ const App = () => {
         <DragGroup>
           <ListsContainer>
             <ToolbarStack>
-              <Add />
               <Undo />
-              <Trash />
               <DarkMode />
               <ChangeTheme />
             </ToolbarStack>
             {listDisplays}
+            <ToolbarStack>
+              <Add />
+              <Trash />
+            </ToolbarStack>
           </ListsContainer>
         </DragGroup>
       </StyledApp>

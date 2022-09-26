@@ -18,9 +18,9 @@ export const themes = {
     roundness: '0',
   },
   strawberry: {
-    primary: '#7e253e',
-    accent: '#d55580',
-    background: '#ffa5ad',
+    primary: '#850e35',
+    accent: '#ee6983',
+    background: '#ffC4C4',
     roundness: '1.5rem',
   },
 } as const;
