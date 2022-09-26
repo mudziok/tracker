@@ -2,8 +2,15 @@ import styled, { ThemeProvider } from 'styled-components';
 import DragGroup from 'contexts/Drag/DragGroup';
 import ListDisplay from 'components/List/ListDisplay';
 import { useSelector } from 'react-redux';
-import { Add, DarkMode, Undo, Trash, ChangeTheme } from 'components/Toolbar';
-import { selectDarkMode, selectTheme } from 'redux/theme/themeSlice';
+import {
+  Add,
+  DarkMode,
+  Undo,
+  Trash,
+  ChangeTheme,
+  Collapse,
+} from 'components/Toolbar';
+import { selectIsDarkMode, selectTheme } from 'redux/theme/themeSlice';
 import { selectLists } from 'redux/tracker/trackerSlice';
 
 const StyledApp = styled.div`
@@ -40,7 +47,7 @@ const ToolbarStack = styled.div`
 
 const App = () => {
   const lists = useSelector(selectLists);
-  const darkMode = useSelector(selectDarkMode);
+  const darkMode = useSelector(selectIsDarkMode);
   const theme = useSelector(selectTheme);
 
   const listDisplays = lists.map((list) => (
@@ -62,6 +69,7 @@ const App = () => {
               <Undo />
               <DarkMode />
               <ChangeTheme />
+              <Collapse />
             </ToolbarStack>
             {listDisplays}
             <ToolbarStack>

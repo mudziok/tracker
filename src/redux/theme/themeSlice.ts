@@ -9,16 +9,23 @@ const themeNames = Object.keys(themes) as Array<keyof typeof themes>;
 
 export interface ThemeState {
   name: keyof typeof themes;
-  darkMode: boolean;
+  isDarkMode: boolean;
+  isCollapsed: boolean;
 }
 
 const isThemeState = (o: any): o is ThemeState => {
-  return 'name' in o && 'darkMode' in o && themeNames.includes(o.name);
+  return (
+    'name' in o &&
+    'isDarkMode' in o &&
+    'isCollapsed' in o &&
+    themeNames.includes(o.name)
+  );
 };
 
 const defaultThemeState: ThemeState = {
   name: 'default',
-  darkMode: true,
+  isDarkMode: true,
+  isCollapsed: false,
 };
 
 const initialThemeState: ThemeState = loadInitialState(
@@ -32,7 +39,7 @@ export const themeSlice = createSlice({
   initialState: initialThemeState,
   reducers: {
     setDarkMode(state, action: PayloadAction<boolean>) {
-      state.darkMode = action.payload;
+      state.isDarkMode = action.payload;
     },
     nextTheme(state) {
       const currentThemeIndex = themeNames.findIndex(
@@ -40,10 +47,14 @@ export const themeSlice = createSlice({
       );
       state.name = themeNames[(currentThemeIndex + 1) % themeNames.length];
     },
+    setIsCollapsed(state, action: PayloadAction<boolean>) {
+      state.isCollapsed = action.payload;
+    },
   },
 });
 
 export const selectTheme = (state: RootState) => themes[state.theme.name];
-export const selectDarkMode = (state: RootState) => state.theme.darkMode;
+export const selectIsDarkMode = (state: RootState) => state.theme.isDarkMode;
+export const selectIsCollapsed = (state: RootState) => state.theme.isCollapsed;
 
-export const { setDarkMode, nextTheme } = themeSlice.actions;
+export const { setDarkMode, nextTheme, setIsCollapsed } = themeSlice.actions;

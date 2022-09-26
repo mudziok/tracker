@@ -39,6 +39,11 @@ const Button = styled('button')<{
   &:hover {
     opacity: 0.6;
   }
+
+  &:focus {
+    outline: dashed 4px ${(props) => props.theme.accent};
+    outline-offset: 2px;
+  }
 `;
 
 export default Button;
