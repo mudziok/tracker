@@ -22,13 +22,11 @@ const TaskPreview: FC<Task> = (task) => {
   const handleMouseDown = (e: MouseEvent) => e.stopPropagation();
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(editTask({ id: id, task: { ...task, name: e.target.value } }));
+    dispatch(editTask({ id, task: { ...task, name: e.target.value } }));
   };
 
   const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch(
-      editTask({ id: id, task: { ...task, description: e.target.value } }),
-    );
+    dispatch(editTask({ id, task: { ...task, description: e.target.value } }));
   };
 
   return (

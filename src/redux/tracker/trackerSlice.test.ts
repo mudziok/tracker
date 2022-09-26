@@ -31,7 +31,7 @@ describe('Tracker Store', () => {
     expect(
       reducer(
         initialState,
-        addTask({ list: initialState.lists[1], task: exampleTask }),
+        addTask({ listId: initialState.lists[1].id, task: exampleTask }),
       ),
     ).toEqual({
       lists: [
@@ -57,7 +57,7 @@ describe('Tracker Store', () => {
       reducer(
         initialState,
         moveTask({
-          list: initialState.lists[1],
+          listId: initialState.lists[1].id,
           task: initialState.lists[0].tasks[0],
         }),
       ),

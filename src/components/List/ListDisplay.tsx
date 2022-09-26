@@ -44,7 +44,8 @@ const ListDisplay: FC<List> = (list) => {
   const droppedInsideHandled = (dropped: JSX.Element, position?: number) => {
     if (dropped.type === TaskPreview) {
       const task = dropped.props as Task;
-      dispatch(moveTask({ task, list, position }));
+      const listId = list.id;
+      dispatch(moveTask({ task, listId, position }));
     }
   };
 
@@ -58,7 +59,8 @@ const ListDisplay: FC<List> = (list) => {
       name: '',
       description: '',
     };
-    dispatch(addTask({ task: emptyTask, list }));
+    const listId = list.id;
+    dispatch(addTask({ task: emptyTask, listId }));
   };
 
   return (

@@ -10,6 +10,8 @@ export interface TrackerState {
   lists: List[];
 }
 
+type Direction = 'up' | 'down' | 'left' | 'right';
+
 export const defaultTrackerState: TrackerState = {
   lists: [
     {
@@ -28,22 +30,6 @@ export const defaultTrackerState: TrackerState = {
         { id: '4', name: 'Mock name 4', description: 'Mock description 4' },
       ],
     },
-    {
-      id: '3',
-      name: 'In QA',
-      tasks: [
-        { id: '5', name: 'Mock name 3', description: 'Mock description 3' },
-        { id: '6', name: 'Mock name 4', description: 'Mock description 4' },
-      ],
-    },
-    {
-      id: '4',
-      name: 'Done',
-      tasks: [
-        { id: '7', name: 'Mock name 3', description: 'Mock description 3' },
-        { id: '8', name: 'Mock name 4', description: 'Mock description 4' },
-      ],
-    },
   ],
 };
 
@@ -55,23 +41,21 @@ export const trackerSlice = createSlice({
   name: trackerSliceName,
   initialState: initialTrackerState,
   reducers: {
-    addTask: (state, action: PayloadAction<{ task: Task; list: List }>) => {
-      const { task: newTask, list: targetList } = { ...action.payload };
+    addTask: (state, action: PayloadAction<{ task: Task; listId: string }>) => {
+      const { task: newTask, listId } = { ...action.payload };
 
-      const destinationList = state.lists.find(
-        (list) => list.id === targetList.id,
-      );
+      const destinationList = state.lists.find((list) => list.id === listId);
       if (destinationList) {
         destinationList.tasks.push(newTask);
       }
     },
     moveTask: (
       state,
-      action: PayloadAction<{ task: Task; list: List; position?: number }>,
+      action: PayloadAction<{ task: Task; listId: string; position?: number }>,
     ) => {
       const {
         task: movedTask,
-        list: targetList,
+        listId: targetListId,
         position,
       } = { ...action.payload };
 
@@ -81,7 +65,7 @@ export const trackerSlice = createSlice({
       }));
 
       const destinationList = state.lists.find(
-        (list) => list.id === targetList.id,
+        (list) => list.id === targetListId,
       );
       if (destinationList) {
         destinationList.tasks.splice(
