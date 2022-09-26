@@ -5,20 +5,35 @@ const reducer = themeSlice.reducer;
 describe('Theme Store', () => {
   const initialState: ThemeState = {
     name: 'default',
-    darkMode: true,
+    isDarkMode: true,
+    isCollapsed: false,
   };
 
   it('can toggle dark mode', () => {
     const toggledState = reducer(
       initialState,
-      setDarkMode(!initialState.darkMode),
+      setDarkMode(!initialState.isDarkMode),
     );
-    expect(toggledState.darkMode).toEqual(!initialState.darkMode);
+    expect(toggledState.isDarkMode).toEqual(!initialState.isDarkMode);
 
     const revertedState = reducer(
       toggledState,
-      setDarkMode(!toggledState.darkMode),
+      setDarkMode(!toggledState.isDarkMode),
     );
-    expect(revertedState.darkMode).toEqual(initialState.darkMode);
+    expect(revertedState.isDarkMode).toEqual(initialState.isDarkMode);
+  });
+
+  it('can toggle collapse', () => {
+    const toggledState = reducer(
+      initialState,
+      setDarkMode(!initialState.isCollapsed),
+    );
+    expect(toggledState.isCollapsed).toEqual(!initialState.isCollapsed);
+
+    const revertedState = reducer(
+      toggledState,
+      setDarkMode(!toggledState.isCollapsed),
+    );
+    expect(revertedState.isCollapsed).toEqual(initialState.isCollapsed);
   });
 });

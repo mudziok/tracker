@@ -9,12 +9,11 @@ const FontSizes = {
 
 type fontSize = keyof typeof FontSizes;
 
-const Header = styled('header')<{ size?: fontSize }>`
+export const Header = styled('header')<{ size?: fontSize }>`
   color: ${(props) => props.theme.accent};
   font-weight: bold;
   font-size: ${(props) => FontSizes[props.size || 'md']};
+  line-height: 1em;
 
   margin: 0.5rem 0;
 `;
-
-export default Header;

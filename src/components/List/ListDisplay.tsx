@@ -22,13 +22,9 @@ const HeaderRow = styled.div`
   margin: 0.5em;
 `;
 
-export const ListCard = styled(Card)`
+const ListCard = styled(Card)`
   box-sizing: border-box;
-  width: calc(250px + 4rem);
-`;
-
-const TaskContainer = styled.div`
-  margin: 0.5em;
+  width: calc(253px + 3.5em);
 `;
 
 const DraggableTask: FC<Task> = (task) => (
@@ -73,14 +69,12 @@ const ListDisplay: FC<List> = (list) => {
             value={name}
             onChange={handleNameChange}
           />
-        </HeaderRow>
-        <TaskContainer>
           <Sortable
             Component={DraggableTask}
             entries={tasks}
             onDroppedInZone={droppedInsideHandled}
           />
-        </TaskContainer>
+        </HeaderRow>
         {tasks.length === 0 && (
           <Button
             fontSize="lg"
