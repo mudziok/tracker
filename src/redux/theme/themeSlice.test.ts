@@ -1,4 +1,9 @@
-import { setDarkMode, themeSlice, ThemeState } from 'redux/theme/themeSlice';
+import {
+  setDarkMode,
+  setIsCollapsed,
+  themeSlice,
+  ThemeState,
+} from 'redux/theme/themeSlice';
 
 const reducer = themeSlice.reducer;
 
@@ -26,13 +31,13 @@ describe('Theme Store', () => {
   it('can toggle collapse', () => {
     const toggledState = reducer(
       initialState,
-      setDarkMode(!initialState.isCollapsed),
+      setIsCollapsed(!initialState.isCollapsed),
     );
     expect(toggledState.isCollapsed).toEqual(!initialState.isCollapsed);
 
     const revertedState = reducer(
       toggledState,
-      setDarkMode(!toggledState.isCollapsed),
+      setIsCollapsed(!toggledState.isCollapsed),
     );
     expect(revertedState.isCollapsed).toEqual(initialState.isCollapsed);
   });
