@@ -6,7 +6,7 @@ import {
   editList,
   moveTask,
 } from 'redux/tracker/trackerSlice';
-import Draggable from 'contexts/Drag/Draggable';
+import Draggable from 'dragDrop/Draggable';
 import Card from 'components/Card';
 import { Task } from 'components/Task/Task';
 import TaskPreview from 'components/Task/TaskPreview';
@@ -15,8 +15,8 @@ import Button from 'components/Button';
 import styled from 'styled-components';
 import { Input } from 'components/Input';
 import { nanoid } from 'nanoid';
-import { Sortable } from 'contexts/Drag/Sortable';
-import { DropZone } from 'contexts/Drag/DropZone';
+import { Sortable } from 'dragDrop/Sortable';
+import { DropZone } from 'dragDrop/DropZone';
 
 const HeaderRow = styled.div`
   margin: 0.5em;

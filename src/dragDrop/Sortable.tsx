@@ -1,6 +1,6 @@
-import { DragGroupContext } from 'contexts/Drag/DragGroup';
-import { DropZone } from 'contexts/Drag/DropZone';
-import { isInsideElement } from 'contexts/Drag/isInsideElement';
+import { DragGroupContext } from 'dragDrop/DragGroup';
+import { DropZone } from 'dragDrop/DropZone';
+import { isInsideElement } from 'dragDrop/isInsideElement';
 import { ComponentType, useCallback, useContext, useMemo, useRef } from 'react';
 import styled, { css } from 'styled-components';
 

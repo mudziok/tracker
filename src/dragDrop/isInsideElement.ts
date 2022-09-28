@@ -1,4 +1,4 @@
-import { Offset } from 'contexts/Drag/DragGroup';
+import { Offset } from 'dragDrop/DragGroup';
 
 export const isInsideElement = (
   { top, left }: Offset,
