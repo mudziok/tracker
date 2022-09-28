@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { DropZone } from '../../contexts/Drag/DropZone';
-import { deleteTask } from '../../redux/tracker/trackerSlice';
-import Card from '../Card';
-import { Header } from '../Header';
-import { Task } from '../Task/Task';
+import { DropZone } from 'dragDrop/DropZone';
+import { deleteTask } from 'redux/tracker/trackerSlice';
+import Card from 'components/Card';
+import { Header } from 'components/Header';
+import { Task } from 'components/Task/Task';
 import { FaTrash } from 'react-icons/fa';
 import styled from 'styled-components';
 

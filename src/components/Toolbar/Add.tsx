@@ -7,7 +7,7 @@ import Card from 'components/Card';
 import { Task } from 'components/Task/Task';
 import { List } from 'components/List/List';
 import { FaPlus } from 'react-icons/fa';
-import { DropZone } from 'contexts/Drag/DropZone';
+import { DropZone } from 'dragDrop/DropZone';
 
 export const Add: FC = () => {
   const dispatch = useDispatch();

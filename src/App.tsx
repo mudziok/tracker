@@ -1,5 +1,5 @@
 import styled, { ThemeProvider } from 'styled-components';
-import DragGroup from 'contexts/Drag/DragGroup';
+import DragGroup from 'dragDrop/DragGroup';
 import ListDisplay from 'components/List/ListDisplay';
 import { useSelector } from 'react-redux';
 import {
