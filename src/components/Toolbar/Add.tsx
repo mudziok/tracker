@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { addList, deleteTask } from 'redux/tracker/trackerSlice';
 import Button from 'components/Button';
 import Card from 'components/Card';
-import Task from 'components/Task/Task';
-import List from 'components/List/List';
+import { Task } from 'components/Task/Task';
+import { List } from 'components/List/List';
 import { FaPlus } from 'react-icons/fa';
 import { DropZone } from 'contexts/Drag/DropZone';
 
