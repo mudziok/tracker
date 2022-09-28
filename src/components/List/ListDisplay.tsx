@@ -8,9 +8,9 @@ import {
 } from 'redux/tracker/trackerSlice';
 import Draggable from 'contexts/Drag/Draggable';
 import Card from 'components/Card';
-import Task from 'components/Task/Task';
+import { Task } from 'components/Task/Task';
 import TaskPreview from 'components/Task/TaskPreview';
-import List from 'components/List/List';
+import { List } from 'components/List/List';
 import Button from 'components/Button';
 import styled from 'styled-components';
 import { Input } from 'components/Input';

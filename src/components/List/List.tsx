@@ -1,9 +1,10 @@
-import Task from 'components/Task/Task';
+import { TaskValidator } from 'components/Task/Task';
+import { z } from 'zod';
 
-interface List {
-  id: string;
-  name: string;
-  tasks: Task[];
-}
+export const ListValidator = z.object({
+  id: z.string(),
+  name: z.string(),
+  tasks: z.array(TaskValidator),
+});
 
-export default List;
+export type List = z.infer<typeof ListValidator>;

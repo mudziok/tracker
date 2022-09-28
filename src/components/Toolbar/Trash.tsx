@@ -4,7 +4,7 @@ import { DropZone } from '../../contexts/Drag/DropZone';
 import { deleteTask } from '../../redux/tracker/trackerSlice';
 import Card from '../Card';
 import { Header } from '../Header';
-import Task from '../Task/Task';
+import { Task } from '../Task/Task';
 import { FaTrash } from 'react-icons/fa';
 import styled from 'styled-components';
 

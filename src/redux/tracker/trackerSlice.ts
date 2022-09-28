@@ -1,16 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import List from 'components/List/List';
-import Task from 'components/Task/Task';
+import { List, ListValidator } from 'components/List/List';
+import { Task } from 'components/Task/Task';
+import { loadInitialState } from 'redux/loadInitialState';
 import { RootState } from 'redux/store';
 import { undoable } from 'redux/undoable';
+import { z } from 'zod';
 
 const trackerSliceName = 'tracker';
 
-export interface TrackerState {
-  lists: List[];
-}
+const trackerStateValidator = z.object({
+  lists: z.array(ListValidator),
+});
 
-type Direction = 'up' | 'down' | 'left' | 'right';
+export type TrackerState = z.infer<typeof trackerStateValidator>;
 
 export const defaultTrackerState: TrackerState = {
   lists: [
@@ -33,9 +35,11 @@ export const defaultTrackerState: TrackerState = {
   ],
 };
 
-const initialTrackerState: TrackerState = localStorage.getItem(trackerSliceName)
-  ? JSON.parse(localStorage.getItem(trackerSliceName)!).present
-  : defaultTrackerState;
+const initialTrackerState: TrackerState = loadInitialState(
+  trackerSliceName,
+  trackerStateValidator.parse,
+  defaultTrackerState,
+);
 
 export const trackerSlice = createSlice({
   name: trackerSliceName,

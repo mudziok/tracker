@@ -1,26 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { loadInitialState } from 'redux/loadInitialState';
 import { RootState } from 'redux/store';
-import { themes } from './themes';
+import { z } from 'zod';
+import { themes, themeNames } from './themes';
 
 const themeSliceName = 'theme';
 
-const themeNames = Object.keys(themes) as Array<keyof typeof themes>;
+const themeStateValidator = z.object({
+  name: z.enum(themeNames),
+  isDarkMode: z.boolean(),
+  isCollapsed: z.boolean(),
+});
 
-export interface ThemeState {
-  name: keyof typeof themes;
-  isDarkMode: boolean;
-  isCollapsed: boolean;
-}
-
-const isThemeState = (o: any): o is ThemeState => {
-  return (
-    'name' in o &&
-    'isDarkMode' in o &&
-    'isCollapsed' in o &&
-    themeNames.includes(o.name)
-  );
-};
+export type ThemeState = z.infer<typeof themeStateValidator>;
 
 const defaultThemeState: ThemeState = {
   name: 'default',
@@ -30,7 +22,7 @@ const defaultThemeState: ThemeState = {
 
 const initialThemeState: ThemeState = loadInitialState(
   themeSliceName,
-  isThemeState,
+  themeStateValidator.parse,
   defaultThemeState,
 );
 
