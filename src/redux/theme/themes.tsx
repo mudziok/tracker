@@ -1,4 +1,20 @@
-export const themes = {
+export const themeNames = [
+  'default',
+  'sunny',
+  'grayscale',
+  'strawberry',
+] as const;
+
+type ThemeName = typeof themeNames[number];
+
+interface ThemeProps {
+  primary: string;
+  accent: string;
+  background: string;
+  roundness: string;
+}
+
+export const themes: Record<ThemeName, ThemeProps> = {
   default: {
     primary: '#323135',
     accent: '#7c7ef5',

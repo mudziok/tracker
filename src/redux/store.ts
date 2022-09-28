@@ -12,7 +12,11 @@ export const store = configureStore({
 store.subscribe(() => {
   const slices = Object.entries(store.getState());
   slices.forEach(([name, state]) => {
-    localStorage.setItem(name, JSON.stringify(state));
+    if ('present' in state) {
+      localStorage.setItem(name, JSON.stringify(state.present));
+    } else {
+      localStorage.setItem(name, JSON.stringify(state));
+    }
   });
 });
 

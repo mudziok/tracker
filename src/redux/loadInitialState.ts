@@ -1,13 +1,12 @@
 export const loadInitialState = <T>(
   name: string,
-  isCorrect: (o: any) => boolean,
+  parse: (o: unknown) => T,
   defaultState: T,
 ): T => {
-  if (localStorage.getItem(name)) {
-    const localData = JSON.parse(localStorage.getItem(name)!);
-    if (isCorrect(localData)) {
-      return localData;
-    }
+  try {
+    const localData: unknown = JSON.parse(localStorage.getItem(name) || '');
+    return parse(localData);
+  } catch {
+    return defaultState;
   }
-  return defaultState;
 };

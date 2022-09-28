@@ -1,7 +1,7 @@
 import { FC, MouseEvent, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import Card from 'components/Card';
-import Task from 'components/Task/Task';
+import { Task } from 'components/Task/Task';
 import { Input, TextArea } from 'components/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { editTask } from 'redux/tracker/trackerSlice';
